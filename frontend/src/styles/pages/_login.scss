@@ -1,3 +1,15 @@
+body {
+  background: {
+    image: url(../../assets/img/bgs/bg_login_L.png),
+      url(../../assets/img/bgs/bg_login_R.png);
+    position-y: top;
+    size: cover;
+    attachment: fixed;
+    repeat: no-repeat;
+  }
+  overflow: hidden;
+}
+
 /* MAIN */
 main {
   height: calc(100vh - 50px);
@@ -60,11 +72,12 @@ main {
   }
 }
 
-a {
+.link {
   color: #fd2d01;
   background-color: transparent;
   text-decoration: none;
   font-weight: 700;
+  margin-left: 5px;
 
   &:hover {
     color: #fd2d01;
@@ -73,9 +86,10 @@ a {
   }
 }
 
-p {
+.flex {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 14px;
 }
 
