@@ -1,0 +1,101 @@
+/* MAIN */
+main {
+  height: calc(100vh - 50px);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  align-items: center;
+}
+
+.icon-user {
+  display: none;
+}
+
+/* ILLUSTRATION */
+.illust-container {
+  display: grid;
+  justify-items: center;
+}
+
+.login img {
+  max-width: 450px;
+  height: auto;
+  margin-right: 50px;
+}
+
+/* FORM */
+.form-container {
+  display: flex;
+  justify-content: flex-start;
+
+  .icon-form {
+    padding: 10px 15px 10px 10px;
+    border-right: 1px solid #dbdbdb;
+  }
+}
+
+.input-form {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  border: 1px solid #dbdbdb;
+  box-shadow: 0px 4px 5px 0px rgba(78, 81, 102, 0.25);
+  background-color: #fff;
+
+  &:hover,
+  &:active {
+    border: 1px solid #cacfe1;
+    box-shadow: 0px 4px 5px 0px #cacfe1;
+  }
+
+  &:active {
+    border: 1px solid #eaeeff;
+  }
+
+  input {
+    border: none;
+    max-width: 200px;
+    outline: none;
+    margin-left: 10px;
+  }
+}
+
+a {
+  color: #fd2d01;
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: 700;
+
+  &:hover {
+    color: #fd2d01;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+}
+
+p {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* BOUTON */
+.btn-primary {
+  display: grid;
+  justify-items: center;
+}
+
+.btn {
+  background-color: #fd2d01;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 15px;
+  padding: 12px 20px;
+  border: none;
+  box-shadow: 0px 4px 5px 0px rgba(78, 81, 102, 0.25);
+
+  &:hover {
+    box-shadow: 0px 4px 5px 2px rgba(78, 81, 102, 0.35);
+  }
+}
