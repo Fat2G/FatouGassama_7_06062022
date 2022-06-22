@@ -1,0 +1,19 @@
+.logo {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: 50px;
+  align-items: center;
+  justify-items: center;
+}
+
+.container-logo {
+  grid-column: 2;
+  background-color: #fff;
+  border-radius: 0px 0px 20px 20px;
+
+  img {
+    max-width: 250px;
+    height: auto;
+    margin: 10px 20px;
+  }
+}
