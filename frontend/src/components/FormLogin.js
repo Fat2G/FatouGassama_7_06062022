@@ -24,7 +24,7 @@ const FormLogin = () => {
               <FontAwesomeIcon icon={faUser} />
             </div>
             <div className="input-form">
-              <label for="email" className="icon-form">
+              <label htmlFor="email" className="icon-form">
                 <FontAwesomeIcon icon={faEnvelope} />
               </label>
               <input
@@ -36,7 +36,7 @@ const FormLogin = () => {
             </div>
             <div>
               <div className="input-form">
-                <label for="password" className="icon-form">
+                <label htmlFor="password" className="icon-form">
                   <FontAwesomeIcon icon={faLock} />
                 </label>
                 <input
