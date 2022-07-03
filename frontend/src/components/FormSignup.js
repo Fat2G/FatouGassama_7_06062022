@@ -14,14 +14,14 @@ import "../styles/components/_responsive.scss";
 const FormSignup = () => {
   return (
     <div>
-      <main class="login">
-        <section class="form-container">
+      <main className="login">
+        <section className="form-container">
           <form action="/" method="post">
-            <div class="icon-user">
+            <div className="icon-user">
               <FontAwesomeIcon icon={faUser} />
             </div>
-            <div class="input-form">
-              <label for="email" class="icon-form">
+            <div className="input-form">
+              <label htmlFor="email" className="icon-form">
                 <FontAwesomeIcon icon={faEnvelope} />
               </label>
               <input
@@ -31,8 +31,8 @@ const FormSignup = () => {
                 required
               />
             </div>
-            <div class="input-form">
-              <label for="password" class="icon-form">
+            <div className="input-form">
+              <label htmlFor="password" className="icon-form">
                 <FontAwesomeIcon icon={faLock} />
               </label>
               <input
@@ -43,8 +43,8 @@ const FormSignup = () => {
               />
               <FontAwesomeIcon icon={faEye} />
             </div>
-            <div class="input-form">
-              <label for="password-confirm" class="icon-form">
+            <div className="input-form">
+              <label htmlFor="password-confirm" className="icon-form">
                 <FontAwesomeIcon icon={faLock} />
               </label>
               <input
@@ -54,8 +54,8 @@ const FormSignup = () => {
                 required
               />
             </div>
-            <div class="input-form">
-              <label for="user" class="icon-form">
+            <div className="input-form">
+              <label htmlFor="user" className="icon-form">
                 <FontAwesomeIcon icon={faUser} />
               </label>
               <input
@@ -65,8 +65,8 @@ const FormSignup = () => {
                 required
               />
             </div>
-            <div class="btn-primary">
-              <button type="button" class="btn">
+            <div className="btn-primary">
+              <button type="button" className="btn">
                 S'inscrire
               </button>
               <div className="flex">
@@ -78,7 +78,7 @@ const FormSignup = () => {
             </div>
           </form>
         </section>
-        <section class="illust-container">
+        <section className="illust-container">
           <img src={illustration} alt="illustration d'une équipe de travail" />
         </section>
       </main>
