@@ -1,0 +1,35 @@
+body.signup {
+  background: {
+    image: url(../../assets/img/bgs/bg_signup_L.png),
+      url(../../assets/img/bgs/bg_signup_R.png);
+    position-y: top;
+    size: cover;
+    attachment: fixed;
+    repeat: no-repeat;
+  }
+  overflow: hidden;
+}
+
+/* LOGO */
+.container-logo {
+  grid-column: 1;
+}
+
+/* ILLUSTRATION */
+.login img {
+  margin-right: 0px;
+}
+
+/* FORM */
+input {
+  width: 200px;
+}
+
+.input-form {
+  &:hover,
+  &:focus,
+  &:active {
+    border: 1px solid #ffd7d7;
+    box-shadow: 0px 4px 5px 0px #ffd7d7;
+  }
+}
