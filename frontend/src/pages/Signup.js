@@ -4,7 +4,7 @@ import HeaderLogo from "../components/HeaderLogo";
 
 const Signup = () => {
   useEffect(() => {
-    // Utilisation du hook d'effet en enlevant la class non voulue aubody afin d'ajouter une.
+    // Utilisation du hook d'effet en enlevant la classe non voulue au body au profit d'une nouvelle classe.
     document.body.classList.remove("login");
     document.body.classList.add("signup");
   }, []);
