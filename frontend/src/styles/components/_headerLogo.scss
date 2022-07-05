@@ -5,7 +5,7 @@
   align-items: center;
   justify-items: center;
 
-  .container-logo {
+  .ctn-logo {
     grid-column: 2;
     background-color: #fff;
     border-radius: 0px 0px 20px 20px;
@@ -19,7 +19,7 @@
 }
 
 .signup {
-  .container-logo {
+  .ctn-logo {
     grid-column: 1;
   }
 }
@@ -29,7 +29,7 @@
   .logo {
     grid-template-columns: 100%;
 
-    .container-logo {
+    .ctn-logo {
       grid-column: 1;
 
       img {

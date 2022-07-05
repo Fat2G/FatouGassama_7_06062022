@@ -15,7 +15,7 @@ const FormSignup = () => {
   return (
     <div>
       <main className="login">
-        <section className="form-container">
+        <section className="ctn-form">
           <form action="/" method="post">
             <div className="icon-user">
               <FontAwesomeIcon icon={faUser} />
@@ -66,9 +66,12 @@ const FormSignup = () => {
               />
             </div>
             <div className="btn-primary">
-              <button type="button" className="btn">
-                S'inscrire
-              </button>
+              <NavLink className="" to="/profil">
+                <button type="button" className="btn">
+                  S'inscrire
+                </button>
+              </NavLink>
+
               <div className="flex">
                 <p>Déjà inscrit ?</p>
                 <NavLink className="link" to="/">
@@ -78,7 +81,7 @@ const FormSignup = () => {
             </div>
           </form>
         </section>
-        <section className="illust-container">
+        <section className="ctn-illust">
           <img src={illustration} alt="illustration d'une équipe de travail" />
         </section>
       </main>

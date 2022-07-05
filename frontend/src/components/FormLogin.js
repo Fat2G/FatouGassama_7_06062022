@@ -15,10 +15,10 @@ const FormLogin = () => {
   return (
     <div>
       <main className="login">
-        <section className="illust-container">
+        <section className="ctn-illust">
           <img src={illustration} alt="illustration d'une équipe de travail" />
         </section>
-        <section className="form-container">
+        <section className="ctn-form">
           <form action="/" method="post">
             <div className="icon-user">
               <FontAwesomeIcon icon={faUser} />
