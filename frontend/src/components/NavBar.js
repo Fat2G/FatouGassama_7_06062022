@@ -10,6 +10,7 @@ import {
   faFolderPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import "../styles/components/_navbar.scss";
+import "../styles/components/_modal.scss";
 import "../styles/components/_responsive.scss";
 
 const NavBar = () => {
