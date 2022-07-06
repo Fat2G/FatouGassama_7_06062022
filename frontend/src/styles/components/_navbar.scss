@@ -1,0 +1,131 @@
+body.dashboard {
+  nav {
+    height: 64px;
+    background-color: #4e5166;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ctn-logo {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    height: 80%;
+    margin-left: 20px;
+    transition: background-color 0.3s ease-in-out;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .logo {
+      height: 40px;
+      padding: 5px 15px;
+    }
+  }
+
+  .icons {
+    font-size: 30px;
+    padding-right: 15px;
+
+    .icon-navbar {
+      color: #ffd7d7;
+      transition: color 0.3s ease-in-out;
+      margin-right: 15px;
+
+      &:hover {
+        color: #fc9e9e;
+      }
+    }
+  }
+
+  .icon-spe {
+    display: visible;
+  }
+
+  .btn {
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 0px 0px 5px 2px #fd2d01;
+    }
+  }
+}
+
+// Formulaire de publication
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(38, 38, 38, 0.8);
+}
+
+.modal-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #4e5166;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 5px #343646;
+  max-width: 600px;
+  min-width: 300px;
+  display: grid;
+
+  textarea {
+    resize: none;
+    width: 500px;
+    min-height: 200px;
+    padding: 10px 50px 10px 10px;
+    margin-top: 30px;
+    border-radius: 20px;
+    outline: none;
+  }
+}
+
+.modal-icons {
+  display: flex;
+  justify-content: flex-end;
+
+  .close-modal,
+  .addImg-modal {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: grid;
+    padding: 5px 7px;
+    color: #ffd7d7;
+    font-size: 30px;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: #fc9e9e;
+    }
+  }
+
+  .addImg-modal{
+    color: #4e5166;
+    top: 55px;
+    right: 25px;
+  }
+}
+
+body.profile {
+  
+  .icon-spe {
+    display: none;
+  }
+}
