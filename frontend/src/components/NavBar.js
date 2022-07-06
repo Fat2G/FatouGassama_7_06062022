@@ -14,15 +14,15 @@ import "../styles/components/_responsive.scss";
 
 const NavBar = () => {
   //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.
-  const [modal, setModal] = useState(false);
+  const [modalPost, setModalPost] = useState(false);
 
   // puisque setModal est false il devient true et inversement
-  const toggleModal = () => {
-    setModal(!modal);
+  const toggleModalPost = () => {
+    setModalPost(!modalPost);
   };
 
   //On empêche de scroller lorsque le popup apparait avec un overflow-y: hidden en css
-  if (modal) {
+  if (modalPost) {
     document.body.classList.add("active-modal");
   } else {
     document.body.classList.remove("active-modal");
@@ -39,7 +39,7 @@ const NavBar = () => {
             <FontAwesomeIcon
               className="icon-navbar"
               icon={faCommentDots}
-              onClick={toggleModal}
+              onClick={toggleModalPost}
             />
             <NavLink className="icon-spe" to="/profil">
               <FontAwesomeIcon className="icon-navbar" icon={faUser} />
@@ -54,20 +54,17 @@ const NavBar = () => {
 
       {/* Implémentation du "short circuit condition" afin de montrer ou cacher les éléments lorsque la condition (modal) est remplie.
       Peut etre considéré comme une version minifié d'un opérateur ternaire. */}
-      {modal && (
+      {modalPost && (
         <div className="modal">
           <div className="overlay"></div>
           <div className="modal-content">
             <div className="modal-icons">
               {/* ajout de fichier image */}
-              <FontAwesomeIcon
-                className="addImg-modal"
-                icon={faFolderPlus}
-              />
+              <FontAwesomeIcon className="addImg-modal" icon={faFolderPlus} />
               {/* fermeture du modal */}
               <FontAwesomeIcon
                 className="close-modal"
-                onClick={toggleModal}
+                onClick={toggleModalPost}
                 icon={faCircleXmark}
               />
             </div>
