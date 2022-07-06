@@ -38,7 +38,7 @@ const NavBar = () => {
           </NavLink>
           <div className="icons">
             <FontAwesomeIcon
-              className="icon-navbar"
+              className="icon-navbar icon-spe"
               icon={faCommentDots}
               onClick={toggleModalPost}
             />
@@ -79,7 +79,7 @@ const NavBar = () => {
               placeholder="Que voulez-vous partager ?"
               required
             ></textarea>
-            <button type="button" className="btn">
+            <button type="button" className="btn btn-modal">
               Publier
             </button>
           </div>
