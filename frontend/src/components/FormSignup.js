@@ -66,7 +66,7 @@ const FormSignup = () => {
               />
             </div>
             <div className="btn-ctn">
-              <NavLink className="" to="/profil">
+              <NavLink className="" to="/dashboard">
                 <button type="button" className="btn">
                   S'inscrire
                 </button>
