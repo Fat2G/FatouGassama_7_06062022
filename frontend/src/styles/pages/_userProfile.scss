@@ -1,0 +1,53 @@
+.profile {
+  main {
+    height: calc(100vh - 64px);
+    display: flex;
+    justify-content: center;
+  }
+
+  .card-profile {
+    display: grid;
+    justify-items: center;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0px 2px 5px 0px rgba(78, 81, 102, 0.25);
+  }
+
+  .icon-profile {
+    background-color: #4e5166;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .icon-profile-add {
+    color: #ffd7d7;
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: #fc9e9e;
+    }
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h2,
+  h3 {
+    margin: 10px 0;
+  }
+
+  .btn {
+    margin-top: 20px;
+  }
+}
