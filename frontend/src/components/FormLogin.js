@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,12 +6,21 @@ import {
   faEnvelope,
   faLock,
   faEye,
+  faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import illustration from "../assets/img/ill-login.png";
 import "../styles/pages/_login.scss";
 import "../styles/components/_responsive.scss";
 
 const FormLogin = () => {
+  //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.
+  const [modalPwd, setModalPwd] = useState(false);
+
+  // puisque setModal est false il devient true et inversement
+  const toggleModalPwd = () => {
+    setModalPwd(!modalPwd);
+  };
+
   return (
     <div>
       <main>
@@ -49,9 +58,9 @@ const FormLogin = () => {
               </div>
               <div className="flex">
                 <p>Mot de passe oublié ?</p>
-                <NavLink className="link" to="/">
+                <button type="button" className="link" onClick={toggleModalPwd}>
                   Cliquez ici
-                </NavLink>
+                </button>
               </div>
             </div>
             <div className="btn-ctn">
@@ -70,6 +79,44 @@ const FormLogin = () => {
           </form>
         </section>
       </main>
+
+      {/* Implémentation du "short circuit condition" afin de montrer ou cacher les éléments lorsque la condition (modal) est remplie.
+      Peut etre considéré comme une version minifié d'un opérateur ternaire. */}
+      {modalPwd && (
+        <div className="modal">
+          <div className="overlay"></div>
+          <div className="modal-content">
+            <div className="modal-icons">
+              {/* fermeture du modal */}
+              <FontAwesomeIcon
+                className="close-modal"
+                onClick={toggleModalPwd}
+                icon={faCircleXmark}
+              />
+            </div>
+            <h1>
+              Veuillez entrer votre adresse mail afin de récupérer votre mot de
+              passe.
+            </h1>
+            <div className="input-form">
+              <label htmlFor="email" className="icon-form">
+                <FontAwesomeIcon icon={faEnvelope} />
+              </label>
+              <input
+                type="text"
+                name="email"
+                placeholder="Adresse email"
+                required
+              />
+            </div>
+            <div className="btn-ctn">
+              <button type="button" className="btn">
+                Envoyer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
