@@ -14,8 +14,8 @@ import "../styles/components/_responsive.scss";
 const FormSignup = () => {
   return (
     <div>
-      <main className="login">
-        <section className="ctn-form">
+      <main>
+        <section className="form-ctn">
           <form action="/" method="post">
             <div className="icon-user">
               <FontAwesomeIcon icon={faUser} />
@@ -65,7 +65,7 @@ const FormSignup = () => {
                 required
               />
             </div>
-            <div className="btn-primary">
+            <div className="btn-ctn">
               <NavLink className="" to="/profil">
                 <button type="button" className="btn">
                   S'inscrire
