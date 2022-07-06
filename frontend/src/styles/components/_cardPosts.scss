@@ -1,0 +1,82 @@
+.ctn-card {
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 75px;
+  box-shadow: 0px 2px 5px 0px rgba(78, 81, 102, 0.25);
+}
+
+.card-header,
+.card-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .user {
+    font-size: 30px;
+    background-color: #808080;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  h2 {
+    font-size: 16px;
+    margin-left: 20px;
+  }
+}
+
+.icon-modif,
+.icon-del {
+  font-size: 20px;
+  margin-left: 15px;
+
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.icon-del,
+.like-icon,
+.icon-modif,
+.dislike-icon {
+  color: #fff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.icon-del,
+.like-icon {
+  background-color: #db2b2b;
+  &:hover {
+    background-color: #a92424;
+  }
+}
+
+.icon-modif,
+.dislike-icon {
+  background-color: #39db2b;
+  &:hover {
+    background-color: #2fae24;
+  }
+}
+
+.like-icon,
+.dislike-icon {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.like,
+.dislike {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.like-num,
+.dislike-num {
+  font-weight: 700;
+  margin: 0px 10px;
+}
