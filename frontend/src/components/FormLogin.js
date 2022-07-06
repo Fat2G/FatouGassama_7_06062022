@@ -14,11 +14,11 @@ import "../styles/components/_responsive.scss";
 const FormLogin = () => {
   return (
     <div>
-      <main className="login">
+      <main>
         <section className="ctn-illust">
           <img src={illustration} alt="illustration d'une équipe de travail" />
         </section>
-        <section className="ctn-form">
+        <section className="form-ctn">
           <form action="/" method="post">
             <div className="icon-user">
               <FontAwesomeIcon icon={faUser} />
@@ -54,10 +54,12 @@ const FormLogin = () => {
                 </NavLink>
               </div>
             </div>
-            <div className="btn-primary">
-              <button type="button" className="btn">
-                Connexion
-              </button>
+            <div className="btn-ctn">
+              <NavLink className="" to="/dashboard">
+                <button type="button" className="btn">
+                  Connexion
+                </button>
+              </NavLink>
               <div className="flex">
                 <p>Pas encore inscrit ?</p>
                 <NavLink className="link" to="/inscription">
