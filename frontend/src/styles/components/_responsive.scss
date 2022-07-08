@@ -4,6 +4,7 @@
     grid-template-columns: 100%;
   }
 
+  // page de connexion
   .login {
     .ctn-form {
       background-color: rgba(166, 168, 179, 0.25);
@@ -12,6 +13,7 @@
     }
   }
 
+  //page d'inscription
   .signup {
     .ctn-form {
       background-color: rgba(255, 215, 215, 0.25);
@@ -33,10 +35,11 @@
     grid-template-columns: 100%;
   }
 
+  //page connexion
   body.login,
   body.signup {
     background : {
-      image: none;
+      image: none !important;
       color: #4e5166;
     }
 
@@ -68,6 +71,7 @@
     margin: 15px auto;
   }
 
+  // page inscription
   body.signup {
     background : {
       color: #ffd7d7;
@@ -82,4 +86,6 @@
       background-color: #ffd7d7;
     }
   }
+
+  // barre de navigation
 }

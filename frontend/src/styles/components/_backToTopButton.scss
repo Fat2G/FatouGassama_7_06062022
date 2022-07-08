@@ -9,3 +9,20 @@
   color: #808080;
   border-radius: 10px;
 }
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .backTop-btn {
+    bottom: 5px;
+    right: 5px;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .backTop-btn {
+    bottom: 10px;
+    right: 20px;
+  }
+}
