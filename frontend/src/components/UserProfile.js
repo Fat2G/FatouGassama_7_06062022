@@ -2,6 +2,7 @@ import { React } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import "../styles/pages/_userProfile.scss";
+import "../styles/components/_responsive.scss"
 
 const UserProfile = () => {
   return (

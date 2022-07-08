@@ -8,6 +8,7 @@ import {
   faThumbsDown,
 } from "@fortawesome/free-solid-svg-icons";
 import "../styles/components/_cardPosts.scss";
+import "../styles/components/_responsive.scss";
 
 const CardPosts = () => {
   return (

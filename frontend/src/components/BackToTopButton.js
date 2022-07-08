@@ -2,6 +2,7 @@ import { useEffect, useState, React } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import "../styles/components/_backToTopButton.scss";
+import "../styles/components/_responsive.scss";
 
 const BackToTopButton = () => {
   const [backToTopButton, setBackToTopButton] = useState(false);
