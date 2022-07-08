@@ -94,10 +94,11 @@ const FormLogin = () => {
                 icon={faCircleXmark}
               />
             </div>
-            <h1>
-              Veuillez entrer votre adresse mail afin de récupérer votre mot de
+            <h1>Vous avez oublié votre mot de passe?</h1>
+            <p>
+              Veuillez entrer votre email afin de récupérer votre mot de
               passe.
-            </h1>
+            </p>
             <div className="input-form">
               <label htmlFor="email" className="icon-form">
                 <FontAwesomeIcon icon={faEnvelope} />
