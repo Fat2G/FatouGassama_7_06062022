@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
-  faRightFromBracket,
   faCommentDots,
   faCircleXmark,
   faFolderPlus,
@@ -12,6 +11,7 @@ import {
 import "../styles/components/_navbar.scss";
 import "../styles/components/_modal.scss";
 import "../styles/components/_responsive.scss";
+import Logout from "./Logout";
 
 const NavBar = () => {
   //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.
@@ -45,10 +45,7 @@ const NavBar = () => {
             <NavLink className="icon-spe" to="/profil">
               <FontAwesomeIcon className="icon-navbar" icon={faUser} />
             </NavLink>
-            <FontAwesomeIcon
-              className="icon-navbar"
-              icon={faRightFromBracket}
-            />
+            <Logout/>
           </div>
         </nav>
       </header>
