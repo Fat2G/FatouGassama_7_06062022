@@ -53,7 +53,7 @@ img {
 
 .input-form {
   padding: 10px;
-  margin-bottom: 20px;
+  // margin-bottom: 5px;
   border-radius: 15px;
   border: 1px solid #dbdbdb;
   box-shadow: 0px 3px 4px 0px rgba(78, 81, 102, 0.25);
@@ -122,4 +122,12 @@ input.btn {
 .input-form,
 .btn {
   transition: box-shadow 0.2s ease-in-out;
+}
+
+/* Message d'erreur */
+.error{
+  color: #fd2d01;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 5px;
 }
