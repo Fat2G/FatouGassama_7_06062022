@@ -15,7 +15,7 @@ body.active-modal {
 }
 
 .overlay {
-  background: rgba(38, 38, 38, 0.8);
+  background: rgba(38, 38, 38, 0.85);
 }
 
 .modal-content {
@@ -27,8 +27,11 @@ body.active-modal {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 10px 5px #343646;
-  min-width: 50%;
   display: grid;
+
+  .form-modal {
+    margin-bottom: 20px;
+  }
 
   textarea {
     resize: none;
@@ -42,6 +45,21 @@ body.active-modal {
   .btn-modal {
     margin: 20px auto 0px auto;
   }
+
+  h1 {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  h1,
+  p {
+    color: #fff;
+  }
+
+  .form-modal input {
+    width: 300px;
+  }
+
 }
 
 .modal-icons {
@@ -69,20 +87,11 @@ body.active-modal {
 }
 
 body.login {
-  .modal-content {
-    background-color: #fff;
-  }
-
   .close-modal {
     color: #fd2d01;
     &:hover {
       color: #b71f00;
     }
-  }
-
-  h1 {
-    font-size: 16px;
-    margin-top: 30px;
   }
 }
 
