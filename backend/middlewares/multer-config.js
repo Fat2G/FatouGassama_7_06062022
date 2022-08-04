@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     // 'null' = pas d'erreurs
     // 'images' = nom du dossier créé pour stocker les images
-    callback(null, 'images')
+    callback(null, 'images/users')
   },
   // paramétrage du nouveau nom des fichiers images
   filename: (req, file, callback) => {
