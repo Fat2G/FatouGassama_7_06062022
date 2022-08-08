@@ -1,4 +1,5 @@
-import React from "react";
+import { useState, React } from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,82 +11,155 @@ import {
 import illustration from "../assets/img/ill-signup.png";
 import "../styles/pages/_signup.scss";
 import "../styles/components/_responsive.scss";
+import ModalSuccess from "./ModalSuccess";
 
 const FormSignup = () => {
-  return (
-    <div>
-      <main>
-        <section className="form-ctn">
-          <form action="/" method="post">
-            <div className="icon-user">
-              <FontAwesomeIcon icon={faUser} />
-            </div>
-            <div className="input-form">
-              <label htmlFor="email" className="icon-form">
-                <FontAwesomeIcon icon={faEnvelope} />
-              </label>
-              <input
-                type="text"
-                name="email"
-                placeholder="Adresse email"
-                required
-              />
-            </div>
-            <div className="input-form">
-              <label htmlFor="password" className="icon-form">
-                <FontAwesomeIcon icon={faLock} />
-              </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Mot de passe"
-                required
-              />
-              <FontAwesomeIcon icon={faEye} />
-            </div>
-            <div className="input-form">
-              <label htmlFor="password-confirm" className="icon-form">
-                <FontAwesomeIcon icon={faLock} />
-              </label>
-              <input
-                type="password"
-                name="password-confirm"
-                placeholder="Confirmer le mot de passe"
-                required
-              />
-            </div>
-            <div className="input-form">
-              <label htmlFor="user" className="icon-form">
-                <FontAwesomeIcon icon={faUser} />
-              </label>
-              <input
-                type="text"
-                name="user"
-                placeholder="Nom d'utilisateur"
-                required
-              />
-            </div>
-            <div className="btn-ctn">
-              <NavLink className="" to="/dashboard">
-                <button type="button" className="btn">
-                  S'inscrire
-                </button>
-              </NavLink>
+  const [formSubmit, setFormSubmit] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [controlPassword, setControlPassword] = useState("");
+  const [username, setUsername] = useState("");
 
-              <div className="flex">
-                <p>Déjà inscrit ?</p>
-                <NavLink className="link" to="/">
-                  Se connecter
-                </NavLink>
-              </div>
-            </div>
-          </form>
-        </section>
-        <section className="ctn-illust">
-          <img src={illustration} alt="illustration d'une équipe de travail" />
-        </section>
-      </main>
-    </div>
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const emailError = document.querySelector(".email-error");
+    const passwordError = document.querySelector(".password-error");
+    const passwordConfirmError = document.querySelector(
+      ".password-confirm-error"
+    );
+    const usernameError = document.querySelector(".username-error");
+
+    passwordConfirmError.innerHTML = "";
+
+    if (password !== controlPassword) {
+      passwordConfirmError.innerHTML = "Les mots de passe ne correspondent pas";
+    } else {
+      axios({
+        method: "POST",
+        url: `${process.env.REACT_APP_API_URL}api/auth/signup`,
+        data: {
+          email,
+          password,
+          username,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data.errors.email + 'tesssst');
+          if (res.data.errors) {
+            emailError.innerHTML = res.data.errors.email;
+            passwordError.innerHTML = res.data.errors.password;
+            usernameError.innerHTML = res.data.errors.username;
+          } else {
+            setFormSubmit(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  return (
+    <>
+      {formSubmit ? (
+        <>
+          <ModalSuccess />
+        </>
+      ) : (
+        <div>
+          <main>
+            <section className="form-ctn">
+              <form action="" method="post" onSubmit={handleSignup}>
+                <div className="icon-user">
+                  <FontAwesomeIcon icon={faUser} />
+                </div>
+                <div className="input-form">
+                  <label htmlFor="email" className="icon-form">
+                    <FontAwesomeIcon icon={faEnvelope} />
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Adresse email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    required
+                  />
+                </div>
+                <div className="email-error error"></div>
+                <br />
+                <div className="input-form">
+                  <label htmlFor="password" className="icon-form">
+                    <FontAwesomeIcon icon={faLock} />
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Mot de passe"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    required
+                  />
+                  <FontAwesomeIcon icon={faEye} />
+                </div>
+                <div className="password-error error"></div>
+                <br />
+                <div className="input-form">
+                  <label htmlFor="password-confirm" className="icon-form">
+                    <FontAwesomeIcon icon={faLock} />
+                  </label>
+                  <input
+                    type="password"
+                    name="password-confirm"
+                    id="password-confirm"
+                    placeholder="Confirmer le mot de passe"
+                    onChange={(e) => setControlPassword(e.target.value)}
+                    value={controlPassword}
+                    required
+                  />
+                </div>
+                <div className="password-confirm-error error"></div>
+                <br />
+                <div className="input-form">
+                  <label htmlFor="username" className="icon-form">
+                    <FontAwesomeIcon icon={faUser} />
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Nom d'utilisateur"
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                    required
+                  />
+                </div>
+                <div className="username-error error"></div>
+                <br />
+                <div className="btn-ctn">
+                  <input type="submit" value="S'inscrire" className="btn" />
+                  <div className="flex">
+                    <p>Déjà inscrit ?</p>
+                    <NavLink className="link" to="/">
+                      Se connecter
+                    </NavLink>
+                  </div>
+                </div>
+              </form>
+            </section>
+            <section className="ctn-illust">
+              <img
+                src={illustration}
+                alt="illustration d'une équipe de travail"
+              />
+            </section>
+          </main>
+        </div>
+      )}
+    </>
   );
 };
 
