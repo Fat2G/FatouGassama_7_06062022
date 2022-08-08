@@ -1,17 +1,18 @@
+//require("dotenv").config();
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const path = require("path");
 
 //import du routeur utilisateur
 const userRoutes = require("./routes/user.routes");
-// utilisation des variables d'environnement pour cacher les données sensibles comme les identifiants mongoDB
-require("dotenv").config();
+
 const dbUserName = process.env.DB_USERNAME;
 const dbPassword = process.env.DB_PASSWORD;
 const dbCluster = process.env.DB_CLUSTER;
 
-//test
 app.use(express.json());
 
 //connexion au serveur mongoDB
@@ -24,7 +25,7 @@ mongoose
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -39,7 +40,11 @@ app.use((req, res, next) => {
 
 // middlewares
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/api/auth", userRoutes);
+
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
