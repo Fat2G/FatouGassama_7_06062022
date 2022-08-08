@@ -1,10 +1,10 @@
 // Imports
-require("dotenv").config();
+//require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cryptoJs = require("crypto-js");
 const User = require("../models/user.model");
-
+const ObjectID = require("mongoose").Types.ObjectId;
 const { signupErrors, loginErrors } = require("../middlewares/errors");
 
 // Constantes des variables d'environnement
@@ -61,16 +61,18 @@ exports.login = (req, res) => {
       if (!user) {
         return res.status(401).json({ message: "Utilisateur non trouvé !" });
       }
-      // Si utilisateur trouvé:
+      // si utilisateur trouvé:
       // Comparaison du mot de passe envoyé avec celui hashé dans la base de données
       bcrypt
         .compare(req.body.password, user.password)
         .then((valid) => {
+          // si le mot de passe ne correspond pas
           if (!valid) {
             return res.status(401).json({ message: "Mot de passe incorrect" });
           }
+          // si le mot de passe correspond
           const token = createToken(user._id);
-          // création d'un cookie lisible uniquement par le serveur
+          // création d'un cookie contenant le token lisible uniquement par le serveur
           res.cookie("jwt", token, { httpOnly: true, maxAge });
           res.status(200).json({
             userId: user._id,
@@ -88,6 +90,21 @@ exports.login = (req, res) => {
 //Déconnection des utilisateurs
 exports.logout = (req, res) => {
   // le cookie créé lors de la connection est retiré en 1ms et renvoie l'utilisateur vers la page d'accueil
+  // res.clearCookie("jwt");
   res.cookie("jwt", "", { maxAge: 1 });
   res.redirect("/");
+};
+
+// Suppression du compte utilisateur
+exports.deleteUser = async (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID inconnu : " + req.params.id);
+
+  User.remove({ _id: req.params.id })
+    .then(() => {
+      res.status(200).json({ message: "Utilisateur supprimé ! " });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
 };
