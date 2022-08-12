@@ -19,6 +19,24 @@ const createToken = (id) => {
   });
 };
 
+// recherche d'un utilisateur selon son id
+exports.getUser = (req, res) => {
+  User.findOne({ _id: req.params.id })
+    // retrait de l'affichage du password pour plus de sécurité
+    .select("-password")
+    .then((user) => res.status(200).json(user))
+    .catch((error) => res.status(500).json({ error }));
+};
+
+// recherche de tous les utilisateurs
+exports.getAllUsers = (req, res) => {
+  User.find()
+    // retrait de l'affichage du password pour plus de sécurité
+    .select("-password")
+    .then((users) => res.status(200).json(users))
+    .catch((error) => res.status(500).json({ error }));
+};
+
 // Enregistrement des utilisateurs
 exports.signup = (req, res) => {
   //Chiffrage de l'adresse email
@@ -107,4 +125,24 @@ exports.deleteUser = async (req, res) => {
     .catch((err) => {
       res.status(500).json({ message: err });
     });
+};
+
+//controle du token utilisateur du token
+exports.checkToken = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, secretToken, async (err, decodedToken) => {
+      if (err) {
+        res.locals.user = null;
+        next();
+      } else {
+        let user = await User.findById(decodedToken.id);
+        res.locals.user = user;
+        next();
+      }
+    });
+  } else {
+    res.locals.user = null;
+    next();
+  }
 };
