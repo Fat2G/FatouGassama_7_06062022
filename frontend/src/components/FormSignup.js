@@ -9,8 +9,6 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import illustration from "../assets/img/ill-signup.png";
-import "../styles/pages/_signup.scss";
-import "../styles/components/_responsive.scss";
 import ModalSuccess from "./ModalSuccess";
 
 const FormSignup = () => {
@@ -36,26 +34,26 @@ const FormSignup = () => {
     } else {
       axios({
         method: "POST",
-        url: `${process.env.REACT_APP_API_URL}api/auth/signup`,
+        url: `${process.env.REACT_APP_API_URL}/api/auth/signup`,
         data: {
           email,
           password,
           username,
         },
       })
-        .then((res) => {
-          console.log(res);
-          console.log(res.data.errors.email + 'tesssst');
-          if (res.data.errors) {
-            emailError.innerHTML = res.data.errors.email;
-            passwordError.innerHTML = res.data.errors.password;
-            usernameError.innerHTML = res.data.errors.username;
-          } else {
-            setFormSubmit(true);
-          }
+        .then(({response:res}) => {
+          console.log("signup ok " + res);
+          setFormSubmit(true);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(({response:err}) => {
+          console.log("error message " + err);
+          if (err.data.errors) {
+            emailError.innerHTML = err.data.errors.email;
+            passwordError.innerHTML = err.data.errors.password;
+            usernameError.innerHTML = err.data.errors.username;
+          } else if (err.data.message) {
+            emailError.innerHTML = err.data.message;
+          }
         });
     }
   };

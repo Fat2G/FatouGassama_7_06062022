@@ -9,8 +9,6 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import illustration from "../assets/img/ill-login.png";
-import "../styles/pages/_login.scss";
-import "../styles/components/_responsive.scss";
 import ModalPassword from "./ModalPassword";
 
 const FormLogin = () => {
@@ -19,29 +17,25 @@ const FormLogin = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const emailError = document.querySelector(".email-error");
-    const passwordError = document.querySelector(".password-error");
+    const errorMessage = document.querySelector(".error-message");
 
     axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/auth/login`,
+      url: `${process.env.REACT_APP_API_URL}/api/auth/login`,
       withCredentials: true,
       data: {
         email,
         password,
       },
     })
-      .then((res) => {
-        console.log(res.data.errors);
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-        } else {
-          window.location = "/dashboard";
-        }
+      .then(() => {
+        window.location = "/dashboard";
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(({ response: err }) => {
+        console.log("erreur login " + err);
+        if (err.data.message) {
+          errorMessage.innerHTML = err.data.message;
+        }
       });
   };
 
@@ -79,7 +73,7 @@ const FormLogin = () => {
                 required
               />
             </div>
-            <div className="email-error error"></div>
+            <br />
             <div>
               <div className="input-form">
                 <label htmlFor="password" className="icon-form">
@@ -96,7 +90,7 @@ const FormLogin = () => {
                 />
                 <FontAwesomeIcon icon={faEye} />
               </div>
-              <div className="password-error error"></div>
+              <div className="error-message error"></div>
               <div className="flex">
                 <p>Mot de passe oublié ?</p>
                 <button type="button" className="link" onClick={toggleModalPwd}>
@@ -119,9 +113,7 @@ const FormLogin = () => {
 
       {/* Implémentation du "short circuit condition" afin de montrer ou cacher les éléments lorsque la condition (modal) est remplie.
       Peut etre considéré comme une version minifié d'un opérateur ternaire. */}
-      {modalPwd && (
-        <ModalPassword/>
-      )}
+      {modalPwd && <ModalPassword />}
     </div>
   );
 };
