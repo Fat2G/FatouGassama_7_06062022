@@ -4,7 +4,6 @@ import {
   faEnvelope,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import "../styles/components/_modal.scss"
 
 const ModalPassword = () => {
   //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.

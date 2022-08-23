@@ -1,7 +1,6 @@
 import { useEffect, React } from "react";
 import NavBar from "../components/NavBar";
 import CardPosts from "../components/CardPosts";
-import "../styles/pages/_dashboard.scss";
 import BackToTopButton from "../components/BackToTopButton";
 
 const Dashboard = () => {

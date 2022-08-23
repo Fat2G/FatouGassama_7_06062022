@@ -1,9 +1,8 @@
 import { useState, React } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import "../styles/pages/_userProfile.scss";
-import "../styles/components/_responsive.scss";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import ModalDelAccount from "./ModalDelAccount";
+import UploadImg from "./UploadImg";
 
 const UserProfile = () => {
   const [delButton, setdelButton] = useState(false);
@@ -20,9 +19,7 @@ const UserProfile = () => {
             <div>
               <FontAwesomeIcon icon={faUser} />
             </div>
-            <div className="icon-profile-add">
-              <FontAwesomeIcon icon={faCirclePlus} />
-            </div>
+            <UploadImg/>
           </div>
 
           <h1> Identifiant </h1>

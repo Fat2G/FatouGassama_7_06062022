@@ -8,9 +8,6 @@ import {
   faCircleXmark,
   faFolderPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import "../styles/components/_navbar.scss";
-import "../styles/components/_modal.scss";
-import "../styles/components/_responsive.scss";
 import Logout from "./Logout";
 
 const NavBar = () => {

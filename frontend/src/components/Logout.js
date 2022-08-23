@@ -4,7 +4,6 @@ import axios from "axios";
 import cookie from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import "../styles/components/_navbar.scss";
 
 const Logout = () => {
   const removeCookie = (key) => {
@@ -16,7 +15,7 @@ const Logout = () => {
   const logout = () => {
     axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_URL}/api/auth/:id/logout`,
+      url: `${process.env.REACT_APP_API_URL}/api/auth/logout`,
       withCredentials: true,
     })
       .then(() => removeCookie("jwt"))

@@ -1,6 +1,4 @@
 import { useState, React } from "react";
-import "../styles/pages/_login.scss";
-import "../styles/components/_modal.scss";
 
 
 const ModalSuccess = () => {  
@@ -8,6 +6,7 @@ const ModalSuccess = () => {
 
   const toggleModalSuccess = () => {
     setModalSuccess(!modalSuccess);
+    window.location = "/";
   };
 
   return (
