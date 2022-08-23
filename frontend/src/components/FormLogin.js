@@ -6,6 +6,7 @@ import {
   faUser,
   faEnvelope,
   faLock,
+  faEyeSlash,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import illustration from "../assets/img/ill-login.png";
@@ -37,6 +38,19 @@ const FormLogin = () => {
           errorMessage.innerHTML = err.data.message;
         }
       });
+  };
+
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState(faEyeSlash);
+
+  const handleTogglePassword = () => {
+    if (type === "password") {
+      setIcon(faEye);
+      setType("text");
+    } else {
+      setIcon(faEyeSlash);
+      setType("password");
+    }
   };
 
   /* Modal */
@@ -80,7 +94,7 @@ const FormLogin = () => {
                   <FontAwesomeIcon icon={faLock} />
                 </label>
                 <input
-                  type="password"
+                  type={type}
                   name="password"
                   id="password"
                   placeholder="Mot de passe"
@@ -88,7 +102,7 @@ const FormLogin = () => {
                   value={password}
                   required
                 />
-                <FontAwesomeIcon icon={faEye} />
+                <FontAwesomeIcon icon={icon} onClick={handleTogglePassword} />
               </div>
               <div className="error-message error"></div>
               <div className="flex">
@@ -112,7 +126,7 @@ const FormLogin = () => {
       </main>
 
       {/* Implémentation du "short circuit condition" afin de montrer ou cacher les éléments lorsque la condition (modal) est remplie.
-      Peut etre considéré comme une version minifié d'un opérateur ternaire. */}
+      Peut etre considéré comme une version minifiée d'un opérateur ternaire. */}
       {modalPwd && <ModalPassword />}
     </div>
   );
