@@ -2,12 +2,7 @@ import { useState, React } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faEnvelope,
-  faLock,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import illustration from "../assets/img/ill-signup.png";
 import ModalSuccess from "./ModalSuccess";
 
@@ -41,11 +36,11 @@ const FormSignup = () => {
           username,
         },
       })
-        .then(({response:res}) => {
+        .then(({ response: res }) => {
           console.log("signup ok " + res);
           setFormSubmit(true);
         })
-        .catch(({response:err}) => {
+        .catch(({ response: err }) => {
           console.log("error message " + err);
           if (err.data.errors) {
             emailError.innerHTML = err.data.errors.email;
@@ -101,7 +96,6 @@ const FormSignup = () => {
                     value={password}
                     required
                   />
-                  <FontAwesomeIcon icon={faEye} />
                 </div>
                 <div className="password-error error"></div>
                 <br />
