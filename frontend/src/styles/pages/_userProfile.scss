@@ -32,6 +32,7 @@ body.profile {
     font-size: 20px;
     position: absolute;
     right: 10px;
+    cursor: pointer;
     transition: color 0.3s ease-in-out;
 
     &:hover {
@@ -50,5 +51,10 @@ body.profile {
 
   .btn {
     margin-top: 20px;
+  }
+
+  .input-img{
+    display: none;
+    visibility: none;
   }
 }
