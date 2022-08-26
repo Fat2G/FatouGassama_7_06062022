@@ -1,0 +1,66 @@
+body.profile {
+  h1 {
+    margin: 20px 0px;
+  }
+
+  .card-profile {
+    display: grid;
+    justify-items: center;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0px 2px 5px 0px rgba(78, 81, 102, 0.25);
+    margin: 0px 30px;
+  }
+
+  .profile-img {
+    max-width: 250px;
+    max-height: 250px;
+    overflow: hidden;
+    border-radius: 10%;
+    margin-bottom: 20px;
+  }
+
+  .upload-form {
+    display: flex;
+  }
+
+  .upload-img,
+  .upload-img-send {
+    background-color: $ter-col;
+    color: $sec-col;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: $pri-col;
+    }
+  }
+
+  .upload-img-send{
+    background-color: $sec-col;
+    color: $ter-col;
+    margin-left: 20px;
+    border: none;
+  }
+
+  .input-img {
+    display: none;
+    visibility: none;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h2,
+  h3 {
+    margin: 10px 0;
+  }
+
+  .btn {
+    margin-top: 20px;
+  }
+}
