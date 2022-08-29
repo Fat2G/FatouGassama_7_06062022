@@ -2,6 +2,7 @@ import { useState, React } from "react";
 import { useSelector } from "react-redux";
 import ModalDelAccount from "./ModalDelAccount";
 import UploadImg from "./UploadImg";
+import {dateParser} from "./TimeFormat";
 
 const UserProfile = () => {
   const userData = useSelector((state) => state.userReducer);
@@ -23,7 +24,7 @@ const UserProfile = () => {
           </div>
           <UploadImg />
 
-          <h3> Compte créé le {userData.createdAt} </h3>
+          <h3> Compte créé le {dateParser(userData.createdAt)} </h3>
           <button type="button" className="btn" onClick={toggleDelButton}>
             Supprimer le compte
           </button>
