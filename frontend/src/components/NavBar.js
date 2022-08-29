@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import logo from "../assets/logo.png";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -26,6 +27,9 @@ const NavBar = () => {
     document.body.classList.remove("active-modal");
   }
 
+  //utilisation de redux pour récupérer les data de l'utilisateur
+  const userData = useSelector((state) => state.userReducer);
+
   return (
     <div>
       <header>
@@ -33,6 +37,9 @@ const NavBar = () => {
           <NavLink className="ctn-logo" to="/dashboard">
             <img src={logo} className="logo" alt="logo groupomania" />
           </NavLink>
+          <div className="welcome">
+            <p>Bienvenue {userData.username} ! </p>
+          </div>
           <div className="icons">
             <FontAwesomeIcon
               className="icon-navbar icon-spe"
@@ -42,7 +49,7 @@ const NavBar = () => {
             <NavLink className="icon-spe" to="/profil">
               <FontAwesomeIcon className="icon-navbar" icon={faUser} />
             </NavLink>
-            <Logout/>
+            <Logout />
           </div>
         </nav>
       </header>
