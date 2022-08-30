@@ -1,4 +1,3 @@
-//require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
@@ -8,6 +7,10 @@ const path = require("path");
 
 //import du routeur utilisateur
 const userRoutes = require("./routes/user.routes");
+
+//import des middlewares
+const userCtrl = require("./controllers/user.ctrlers");
+const auth = require("./middlewares/auth");
 
 const dbUserName = process.env.DB_USERNAME;
 const dbPassword = process.env.DB_PASSWORD;
@@ -25,7 +28,7 @@ mongoose
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -38,11 +41,17 @@ app.use((req, res, next) => {
   next();
 });
 
-// middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Vérification des utilisateurs
+app.get("*", userCtrl.checkToken);
+app.get("/jwt", auth, (req, res) => {
+ res.status(200).send(res.locals.user._id);
+});
+
+// Routes
 app.use("/api/auth", userRoutes);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
