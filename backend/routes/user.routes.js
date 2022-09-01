@@ -3,12 +3,14 @@ const router = express.Router();
 // import du controller utilisateur
 const userCtrl = require("../controllers/user.ctrlers");
 const authCtrl = require("../controllers/auth.ctrlers");
+const uploadCtrl = require("../controllers/uploadPic.ctrlers");
 // import des middlewares
 const email = require("../middlewares/email");
 const password = require("../middlewares/password");
 const connection = require("../middlewares/connection");
 const auth = require("../middlewares/auth");
-const multer = require("../middlewares/multer-config");
+const multer = require("multer");
+const upload = multer();
 
 /////////// création des routes
 
@@ -25,7 +27,6 @@ router.get("/jwt", userCtrl.checkToken);
 
 // profil
 router.delete("/:id", userCtrl.deleteUser);
-
-
+router.post("/upload", upload.single('file'), uploadCtrl.uploadPic);
 // export du routeur
 module.exports = router;
