@@ -33,7 +33,6 @@ const FormLogin = () => {
         window.location = "/dashboard";
       })
       .catch(({ response: err }) => {
-        console.log("erreur login " + err);
         if (err.data.message) {
           errorMessage.innerHTML = err.data.message;
         }
