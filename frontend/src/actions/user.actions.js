@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Pour récupérer les données de l'utilisateur connecté
 export const GET_USER = "GET_USER";
-export const UPLOAD_IMG = "UPLOAD_IMG";
+export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 
 export const GET_USER_ERRORS = "GET_USER_ERRORS";
 
@@ -21,17 +21,32 @@ export const getUser = (userId) => {
   };
 };
 
-export const uploadImg = (data, id) => {
+export const uploadPic = (data, id) => {
   return (dispatch) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/auth/${id}/upload`, data)
+      .post(`${process.env.REACT_APP_API_URL}/api/auth/upload`, data)
       .then((res) => {
-        return axios
-          .get(`${process.env.REACT_APP_API_URL}/api/auth/${id}`)
-          .then((res) => {
-            dispatch({ type: UPLOAD_IMG, payload: res.data.picture });
-          });
+        if (res.data.errors) {
+          dispatch({ type: GET_USER_ERRORS, payload: res.data.errors });
+        } else {
+          dispatch({ type: GET_USER_ERRORS, payload: "" });
+          return axios
+            .get(`${process.env.REACT_APP_API_URL}/api/auth/${id}`)
+            .then((res) => {
+              dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture });
+            });
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        if (err.response.data.errors) {
+          dispatch({
+            type: GET_USER_ERRORS,
+            payload: err.response.data.errors,
+          });
+        } else {
+          dispatch({ type: GET_USER_ERRORS, payload: "" });
+        }
+      });
   };
 };
