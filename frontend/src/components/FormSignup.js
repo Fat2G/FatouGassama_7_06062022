@@ -15,6 +15,8 @@ const FormSignup = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
+
+    // messages d'erreur
     const emailError = document.querySelector(".email-error");
     const passwordError = document.querySelector(".password-error");
     const passwordConfirmError = document.querySelector(
@@ -36,8 +38,7 @@ const FormSignup = () => {
           username,
         },
       })
-        .then(({ response: res }) => {
-          console.log("signup ok " + res);
+        .then(() => {
           setFormSubmit(true);
         })
         .catch(({ response: err }) => {
