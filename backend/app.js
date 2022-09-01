@@ -7,6 +7,7 @@ const path = require("path");
 
 //import du routeur utilisateur
 const userRoutes = require("./routes/user.routes");
+const postRoutes = require("./routes/post.routes");
 
 //import des middlewares
 const userCtrl = require("./controllers/user.ctrlers");
@@ -53,6 +54,7 @@ app.get("/jwt", auth, (req, res) => {
 
 // Routes
 app.use("/api/auth", userRoutes);
+app.use("/api/post", postRoutes);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
