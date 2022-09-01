@@ -1,7 +1,7 @@
 import { React, useState } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import "../styles/pages/_login.scss";
-import "../styles/components/_modal.scss";
+import cookie from "js-cookie";
 
 const ModalDelAccount = () => {
   //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.
@@ -12,19 +12,31 @@ const ModalDelAccount = () => {
     setModalDelAccount(!modalDelAccount);
   };
 
+  const userData = useSelector((state) => state.userReducer);
+
+  // retrait du cookie
+  const removeCookie = (key) => {
+    if (window !== "undefined") {
+      cookie.remove(key, { expires: 1 });
+    }
+  };
+
   //suppression du compte utilisateur
   const delUser = () => {
     axios({
-      method: "DELETE",
-      url: `${process.env.REACT_APP_API_URL}api/auth/user/delete`,
+      method: "delete",
+      url: `${process.env.REACT_APP_API_URL}/api/auth/${userData._id}`,
+      withCredentials: true,
     })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-      console.log(err.response);
-    })
+      .then((res) => {
+        removeCookie("jwt");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    window.location = "/";
   };
 
   return (
