@@ -24,8 +24,8 @@ body.profile {
     display: flex;
   }
 
-  .upload-img,
-  .upload-img-send {
+  .upload-pic,
+  .upload-pic-send {
     background-color: $ter-col;
     color: $sec-col;
     font-weight: 700;
@@ -39,7 +39,7 @@ body.profile {
     }
   }
 
-  .upload-img-send{
+  .upload-pic-send{
     background-color: $sec-col;
     color: $ter-col;
     margin-left: 20px;
