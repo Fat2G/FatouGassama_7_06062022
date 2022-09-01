@@ -66,7 +66,9 @@ exports.login = (req, res) => {
         .then((valid) => {
           // si le mot de passe ne correspond pas
           if (!valid) {
-            return res.status(401).json({ message: "Mot de passe incorrect !" });
+            return res
+              .status(401)
+              .json({ message: "Mot de passe incorrect !" });
           }
           // Si le mot de passe correspond
           const token = createToken(user._id);
@@ -89,5 +91,5 @@ exports.login = (req, res) => {
 exports.logout = (req, res) => {
   // Le cookie créé lors de la connection est retiré en 1ms et renvoie l'utilisateur vers la page d'accueil
   res.cookie("jwt", "", { maxAge: 1 });
-  res.redirect("/");
+  // res.redirect("/");
 };
