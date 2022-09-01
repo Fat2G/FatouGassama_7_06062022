@@ -6,7 +6,7 @@ import {dateParser} from "./TimeFormat";
 
 const UserProfile = () => {
   const userData = useSelector((state) => state.userReducer);
-
+  
   // Suppression du compte
   const [delButton, setdelButton] = useState(false);
 
@@ -20,10 +20,9 @@ const UserProfile = () => {
         <h1> Profil de {userData.username}</h1>
         <section className="card-profile">
           <div className="profile-img">
-            <img src={userData.imageUrl} alt="profil utilisateur" />
+            <img src={userData.picture} alt="profil utilisateur" />
           </div>
-          <UploadImg />
-
+          <UploadImg />          
           <h3> Compte créé le {dateParser(userData.createdAt)} </h3>
           <button type="button" className="btn" onClick={toggleDelButton}>
             Supprimer le compte
