@@ -1,16 +1,16 @@
 import { useState, React } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { uploadImg } from "../actions/user.actions";
+// import axios from "axios";
+import { uploadPic } from "../actions/user.actions";
 
 const UploadImg = () => {
   const [file, setFile] = useState();
+  // récupération des données de l'utilisateur stockées dans le reducer
+  const userData = useSelector((state) => state.userReducer);
   // action qui envoie l'image vers le backend
   const dispatch = useDispatch();
-  // données de l'utilisateur stockées dans le reducer
-  const userData = useSelector((state) => state.userReducer);
 
-  const updateImg = (e) => {
+  const handlePic = (e) => {
     e.preventDefault();
     //objet permettant de rassembler l'image et les informations eventuelles
     const formData = new FormData();
@@ -18,24 +18,24 @@ const UploadImg = () => {
     formData.append("userId", userData._id);
     formData.append("file", file);
 
-    dispatch(uploadImg(formData, userData._id));
+    dispatch(uploadPic(formData, userData._id));
+  };
 
-    axios({
-      method: "post",
-      url: `${process.env.REACT_APP_API_URL}/api/auth/${userData._id}/upload`,
-      withCredentials: true,
-      data: formData,
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+  /**
+   * If the file input is not empty, enable the submit button
+   */
+  const btnDisabled = () => {
+    let picFile = document.querySelector("#file").file;
+
+    if (picFile !== "") {
+      document.querySelector("#btnSubmit").disabled = false;
+    }
   };
 
   return (
     <div>
-      <form action="" method="put" onSubmit={updateImg} className="upload-form">
-        <label htmlFor="file" className="upload-img">
+      <form action="" method="put" onSubmit={handlePic} className="upload-form">
+        <label htmlFor="file" className="upload-pic">
           Changer l'image
         </label>
         <input
@@ -44,10 +44,19 @@ const UploadImg = () => {
           className="input-img"
           name="file"
           accept=".jpg, .jpeg, .png"
-          onChange={(e) => setFile(e.target.files[0])}
+          onChange={(e) => {
+            setFile(e.target.files[0]);
+            btnDisabled();
+          }}
         />
         <br />
-        <input type="submit" value="Envoyer" className="upload-img-send" />
+        <input
+          type="submit"
+          id="btnSubmit"
+          value="Envoyer"
+          disabled={true}
+          className="upload-pic-send"
+        />
       </form>
     </div>
   );
