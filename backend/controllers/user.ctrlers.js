@@ -7,14 +7,6 @@ const fs = require("fs");
 // Variables d'environnement
 const secretToken = process.env.SECRET_TOKEN;
 
-// Création du token encrypté pour une durée de 12h
-const maxAge = 12 * 60 * 60 * 1000;
-const createToken = (id) => {
-  return jwt.sign({ id }, secretToken, {
-    expiresIn: maxAge,
-  });
-};
-
 // Recherche d'un utilisateur selon son id
 exports.getUser = (req, res) => {
   User.findOne({ _id: req.params.id })
@@ -74,36 +66,6 @@ exports.deleteUser = (req, res) => {
     });
 };
 
-/* exports.deleteUser = (req, res) => {
-  User.findOne({ _id: req.params.id })
-    .then((user) => {
-      // suppression de l'image
-      const filename = user.picture.split("/images/users/")[1];
-      if (filename !== "defaultImg.jpg") {
-        fs.unlink(`images/users/${filename}`, (err) => {
-          if (err) {
-            throw err;
-          }
-        });
-      }
-    })
-    .catch((err) => res.status(500).json({ err }));
-
-  // vérification des autorisations
-  if (req.params.id === req.token.userId) {
-    // suppressions du compte et du cookie
-    User.deleteOne({ _id: req.params.id })
-      .then(() => {
-        res.clearCookie("jwt");
-        res.redirect("/");
-      })
-      .catch((error) => res.status(400).json({ error }));
-  } else {
-    res.status(401).json({ error: "Non autorisé !" });
-  }
-};
- */
-
 // Controle du token utilisateur du token
 exports.checkToken = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -122,38 +84,4 @@ exports.checkToken = (req, res, next) => {
     res.locals.user = null;
     next();
   }
-};
-
-// upload de l'image de profil
-exports.uploadImg = (req, res, next) => {
-  User.findOne({ _id: req.params.id })
-    .then((user) => {
-      // suppression de l'image par défaut
-      const filename = user.picture.split("./uploads/profil/")[1];
-      if (req.file && filename !== "defaultImg.jpg") {
-        fs.unlink(`./uploads/profil/${filename}`, (err) => {
-          if (err) {
-            throw err;
-          }
-        });
-      }
-
-      // update de l'image
-      if (req.params.id === req.token.userId) {
-        User.updateOne(
-          { _id: req.params.id },
-          {
-            picture: `${req.protocol}://${req.get("host")}/uploads/profil/${
-              req.file.filename
-            }`,
-            _id: req.params.id,
-          }
-        )
-          .then(() => res.status(200).json({ message: "Image mise à jour !" }))
-          .catch((error) => res.status(400).json({ error }));
-      } else {
-        res.status(401).json({ error: "Non autorisé" });
-      }
-    })
-    .catch((error) => res.status(500).json({ error }));
 };
