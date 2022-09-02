@@ -1,6 +1,7 @@
 body.profile {
   h1 {
     margin: 20px 0px;
+    color: $ter-col;
   }
 
   .card-profile {
@@ -31,6 +32,7 @@ body.profile {
     font-weight: 700;
     padding: 10px;
     border-radius: 10px;
+    margin-bottom: 12px;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
 
@@ -44,6 +46,15 @@ body.profile {
     color: $ter-col;
     margin-left: 20px;
     border: none;
+  }
+
+  .upload-pic-send:disabled{
+    background-color: #e0e0e0;
+    color: #7d7d7d;
+    cursor: not-allowed;
+    &:hover {
+      color: none;
+    }
   }
 
   .input-img {
