@@ -38,10 +38,10 @@ module.exports.loginErrors = (err) => {
 module.exports.uploadErrors = (err) => {
   let errors = { format: "", maxSize: "" };
 
-  if (err.message.includes("fichier invalide")) 
+  if (err.message.includes("invalid file")) 
     errors.format = "Format invalide ! Veuillez choisir une image de type .jpg, .jpeg ou .png";
 
-  if (err.message.includes("taille maximale")) 
+  if (err.message.includes("max size")) 
     errors.maxSize = "Veuillez choisir un fichier ne dépassant pas 500ko !";
 
   return errors;
