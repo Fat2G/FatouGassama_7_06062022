@@ -47,7 +47,7 @@ const ModalDelAccount = () => {
         <div className="modal">
           <div className="overlay"></div>
           <div className="modal-content">
-            <h1>Voulez-vous supprimer le compte ?</h1>
+            <h1 id="modal-title">Voulez-vous supprimer le compte ?</h1>
             <div className="btn-ctn btn-flex">
               <button type="button" className="btn" onClick={delUser}>
                 Supprimer
