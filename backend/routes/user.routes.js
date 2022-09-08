@@ -26,7 +26,7 @@ router.get("/:id", auth, userCtrl.getUser);
 router.get("/jwt", userCtrl.checkToken);
 
 // profil
-router.delete("/:id", upload.single("file"), userCtrl.deleteUser);
+router.delete("/:id", auth, userCtrl.deleteUser);
 router.post("/upload", upload.single('file'), uploadCtrl.uploadPic);
 // export du routeur
 module.exports = router;
