@@ -40,30 +40,24 @@ exports.userId = (req, res) => {
 exports.deleteUser = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID inconnu : " + req.params.id);
-  
-  User.findOne({ _id: req.params.id })
-    .then((user) => {
-      // suppression de l'image
-      const filename = user.picture.split("./uploads/profil/")[1];;
-      if (filename !== "defaultImg.jpg") {
-        fs.unlink(`./uploads/profil/${filename}`, (err) => {
-          if (err) {
-            throw err;
-          }
-        });
-      }
-    })
-    .catch((err) => res.status(500).json({ err }));
 
-  User.deleteOne({ _id: req.params.id })
-    .then(() => {
-      res.cookie("jwt", "", { maxAge: 1 });
-      res.redirect("/");
-      res.status(200).json({ message: "Utilisateur supprimé ! " });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+  User.findOne({ _id: req.params.id }).then((user) => {
+    // suppression de l'image
+    const fileName = user.username + ".jpg";
+    console.log(fileName);
+    if (fileName !== "defaultImg.jpg") {
+      fs.unlink(
+        `${__dirname}/../../frontend/public/uploads/profil/${fileName}`,
+        () => {
+          User.deleteOne({ _id: req.params.id })
+            .then(() =>
+              res.status(200).json({ message: "Utilisateur supprimé !" })
+            )
+            .catch((error) => res.status(400).json({ error }));
+        }
+      );
+    }
+  });
 };
 
 // Controle du token utilisateur du token
