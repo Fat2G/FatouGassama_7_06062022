@@ -14,7 +14,7 @@ exports.uploadPic = (req, res) => {
 
   try {
     if (!MIME_TYPES) {
-      throw Error("Invalid file");
+      throw Error("invalid file");
     }
     if (req.file.size > 500000) {
       throw Error("max size");
