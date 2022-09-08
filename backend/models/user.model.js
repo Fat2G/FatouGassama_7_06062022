@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     picture: { type: String, default: "./uploads/profil/defaultImg.jpg" },
+    likes: { type: [String] },
     admin: { type: Number, default: 0 },
   },
   { timestamps: true }
