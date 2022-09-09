@@ -2,10 +2,10 @@ const User = require("../models/user.model");
 const fs = require("fs");
 const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
-const { uploadErrors } = require("../middlewares/errors");
+const { uploadErrors } = require("../middlewares/errors"); 
 
 // upload de l'image de profil
-exports.uploadPic = (req, res) => {
+exports.uploadPic = async (req, res) => {
   const MIME_TYPES = {
     "image/jpg": "jpg",
     "image/jpeg": "jpg",
@@ -29,7 +29,7 @@ exports.uploadPic = (req, res) => {
   const fileName = req.body.name + ".jpg";
 
   // création stockage des images en statique
-  pipeline(
+  await pipeline(
     req.file.stream,
     // chemin où sont stockées les images
     fs.createWriteStream(
@@ -38,7 +38,7 @@ exports.uploadPic = (req, res) => {
   );
   // création du chemin pour la base de données
   try {
-    User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       req.body.userId,
       { $set: { picture: "./uploads/profil/" + fileName } },
       { new: true, upsert: true, setDefaultsOnInsert: true }
