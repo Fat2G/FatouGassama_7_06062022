@@ -28,11 +28,11 @@ exports.getAllUsers = (req, res) => {
 // Vérification de la présence et validité de l'ID utilisateur
 exports.userId = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID non connue : " + req.params.id);
+    return res.status(400).send("ID non connu : " + req.params.id);
 
   User.findById(req.params.id, (err, docs) => {
     if (!err) res.send(docs);
-    else console.log("ID non connue : " + err);
+    else console.log("ID non connu : " + err);
   }).select("-password");
 };
 
