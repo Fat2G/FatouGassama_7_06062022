@@ -20,7 +20,7 @@ router.post("/login", connection, authCtrl.login);
 router.get("/logout", auth, authCtrl.logout);
 
 // utilisateur
-router.get("/", auth, userCtrl.getAllUsers);
+router.get("/", userCtrl.getAllUsers);
 router.get("/:id", userCtrl.userId);
 router.get("/:id", auth, userCtrl.getUser);
 router.get("/jwt", userCtrl.checkToken);
