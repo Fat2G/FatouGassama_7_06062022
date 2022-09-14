@@ -5,19 +5,17 @@ const secretToken = process.env.SECRET_TOKEN;
 
 //export du middleware d'authentification
 module.exports = (req, res, next) => {
-  try {
-    //récupération du cookie contenant le token
-    const token = req.cookies.jwt;
-    // vérification du token
-    req.token = jwt.verify(token, secretToken);
-
-    // comparaison de l'ID de l'utilisateur avec celui du corps de la requête
-    if (req.body.userId && req.body.userId !== req.token.userId) {
-      throw "user ID non valable";
-    } else {
-      next();
-    }
-  } catch (err) {
-    res.status(403).json({ message: "Accès refusé !" + err });
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, secretToken, (err, decodedToken) => {
+      if (err) {
+        res.send(200).json(err);
+      } else {
+        console.log("decodedtoken "+ decodedToken.id);
+        next();
+      }
+    });
+  } else {
+    console.log("Pas de token");
   }
 };
