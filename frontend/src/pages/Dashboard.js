@@ -1,7 +1,7 @@
 import { useEffect, React } from "react";
 import NavBar from "../components/NavBar";
-import CardPosts from "../components/CardPosts";
-import BackToTopButton from "../components/BackToTopButton";
+import BackToTopButton from "../components/utils/BackToTopButton";
+import FilActu from "../components/FilActu";
 
 const Dashboard = () => {
   // Utilisation du hook d'effet en enlevant la classe non voulue au body au profit d'une nouvelle classe.
@@ -13,14 +13,7 @@ const Dashboard = () => {
   return (
     <div>
       <NavBar />
-      <CardPosts />
-      <CardPosts />
-      <CardPosts />
-      <CardPosts />
-      <CardPosts />
-      <CardPosts />
-      <CardPosts />
-
+      <FilActu />
       <BackToTopButton />
     </div>
   );
