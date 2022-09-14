@@ -1,11 +1,14 @@
+// routeur
 const express = require("express");
 const router = express.Router();
 //import du controller post
 const postCtrl = require("../controllers/post.ctrlers");
+const multer = require("multer");
+const upload = multer();
 
 //CRUD
 router.get("/", postCtrl.readPost);
-router.post("/", postCtrl.createPost);
+router.post("/", upload.single('file'), postCtrl.createPost);
 router.put("/:id", postCtrl.updatePost);
 router.delete("/:id", postCtrl.deletePost);
 
