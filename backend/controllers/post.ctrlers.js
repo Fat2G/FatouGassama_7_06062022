@@ -1,6 +1,10 @@
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
+const { uploadErrors } = require("../middlewares/errors");
 const ObjectId = require("mongoose").Types.ObjectId;
+const fs = require("fs");
+const { promisify } = require("util");
+const pipeline = promisify(require("stream").pipeline);
 
 // liste des posts
 module.exports.readPost = (req, res) => {
@@ -11,13 +15,41 @@ module.exports.readPost = (req, res) => {
 };
 
 // création de posts
-module.exports.createPost = (req, res) => {
+module.exports.createPost = async (req, res) => {
+  let fileName;
+  // contrôle de l'image à uploader
+  if (req.file !== null) {
+    try {
+      if (
+        req.file.detectedMimeType != "image/jpg" &&
+        req.file.detectedMimeType != "image/png" &&
+        req.file.detectedMimeType != "image/jpeg"
+      )
+        throw Error("invalid file");
+
+      if (req.file.size > 500000) throw Error("max size");
+    } catch (err) {
+      const errors = uploadErrors(err);
+      return res.status(201).json({ errors });
+    }
+    // Façon dont seront nommées les images en format jpg
+    fileName = req.body.posterId + Date.now() + ".jpg";
+
+    // création stockage des images en statique
+    await pipeline(
+      req.file.stream,
+      // chemin où sont stockées les images
+      fs.createWriteStream(
+        `${__dirname}/../../frontend/public/uploads/posts/${fileName}`
+      )
+    );
+  }
   // le modèle post est incrémenté
   const newPost = new Post({
     posterId: req.body.posterId,
     message: req.body.message,
-    likes: 0,
-    usersLiked: [],
+    picture: req.file !== null ? "./uploads/posts" + fileName : "",
+    likers: [],
   });
 
   // enregistrement du post dans la base de données
