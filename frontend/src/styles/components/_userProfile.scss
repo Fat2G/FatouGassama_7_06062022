@@ -4,8 +4,14 @@ body.profile {
     color: $ter-col;
   }
 
-  #modal-title{
+  #modal-title {
     color: #fff;
+  }
+  .card-profile,
+  .profile-img,
+  .upload-pic,
+  .upload-pic-send {
+    box-shadow: 0px 2px 5px 0px rgba(78, 81, 102, 0.25);
   }
 
   .card-profile {
@@ -13,7 +19,6 @@ body.profile {
     justify-items: center;
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0px 2px 5px 0px rgba(78, 81, 102, 0.25);
     margin: 0px 30px;
   }
 
@@ -23,6 +28,10 @@ body.profile {
     overflow: hidden;
     border-radius: 10%;
     margin-bottom: 20px;
+
+    img{
+      object-position: -40px -40px;
+    }
   }
 
   .upload-form {
@@ -45,14 +54,14 @@ body.profile {
     }
   }
 
-  .upload-pic-send{
+  .upload-pic-send {
     background-color: $sec-col;
     color: $ter-col;
     margin-left: 20px;
     border: none;
   }
 
-  .upload-pic-send:disabled{
+  .upload-pic-send:disabled {
     background-color: #e0e0e0;
     color: #7d7d7d;
     cursor: not-allowed;
