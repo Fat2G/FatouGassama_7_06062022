@@ -1,5 +1,5 @@
 import axios from "axios";
-
+// action pour avoir tous les utilisateurs dans le store
 export const GET_USERS = "GET_USERS";
 
 export const getUsers = () => {
