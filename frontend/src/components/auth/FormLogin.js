@@ -9,7 +9,7 @@ import {
   faEyeSlash,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
-import illustration from "../assets/img/ill-login.png";
+import illustration from "../../assets/img/ill-login.png";
 import ModalPassword from "./ModalPassword";
 
 const FormLogin = () => {

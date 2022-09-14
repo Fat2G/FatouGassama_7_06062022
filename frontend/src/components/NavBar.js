@@ -9,7 +9,7 @@ import {
   faCircleXmark,
   faFolderPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import Logout from "./Logout";
+import Logout from "./auth/Logout";
 
 const NavBar = () => {
   //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.

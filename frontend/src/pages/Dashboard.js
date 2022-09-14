@@ -1,7 +1,7 @@
 import { useEffect, React } from "react";
 import NavBar from "../components/NavBar";
 import BackToTopButton from "../components/utils/BackToTopButton";
-import FilActu from "../components/FilActu";
+import FilActu from "../components/dashboard/FilActu";
 
 const Dashboard = () => {
   // Utilisation du hook d'effet en enlevant la classe non voulue au body au profit d'une nouvelle classe.

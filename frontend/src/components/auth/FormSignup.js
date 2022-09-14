@@ -3,8 +3,8 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import illustration from "../assets/img/ill-signup.png";
-import ModalSuccess from "./ModalSuccess";
+import illustration from "../../assets/img/ill-signup.png";
+import ModalSuccess from "../profil/ModalSuccess";
 
 const FormSignup = () => {
   const [formSubmit, setFormSubmit] = useState(false);

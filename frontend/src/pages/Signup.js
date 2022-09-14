@@ -1,5 +1,5 @@
 import { useEffect, React } from "react";
-import FormSignup from "../components/FormSignup";
+import FormSignup from "../components/auth/FormSignup";
 import HeaderLogo from "../components/HeaderLogo";
 
 const Signup = () => {

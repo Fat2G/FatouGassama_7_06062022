@@ -1,5 +1,5 @@
 import { useEffect, React } from "react";
-import FormLogin from "../components/FormLogin";
+import FormLogin from "../components/auth/FormLogin";
 import HeaderLogo from "../components/HeaderLogo";
 
 const Index = () => {

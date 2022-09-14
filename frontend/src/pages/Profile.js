@@ -1,6 +1,6 @@
 import { useEffect, React } from "react";
 import NavBar from "../components/NavBar";
-import UserProfile from "../components/UserProfile";
+import UserProfile from "../components/profil/UserProfile";
 
 const Profile = () => {
   useEffect(() => {
