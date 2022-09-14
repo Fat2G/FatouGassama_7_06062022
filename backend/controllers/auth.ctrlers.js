@@ -91,5 +91,4 @@ exports.login = (req, res) => {
 exports.logout = (req, res) => {
   // Le cookie créé lors de la connection est retiré en 1ms et renvoie l'utilisateur vers la page d'accueil
   res.cookie("jwt", "", { maxAge: 1 });
-  // res.redirect("/");
 };
