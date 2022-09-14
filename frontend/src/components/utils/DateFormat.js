@@ -1,4 +1,4 @@
-export const dateParser = (num) => {
+export const dateFormat = (num) => {
   const timeStamp = Date.parse(num);
   
   const options = {
