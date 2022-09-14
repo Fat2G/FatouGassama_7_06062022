@@ -17,8 +17,8 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getToken = () => {
-      axios({
+    const getToken = async() => {
+      await axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/jwt`,
         withCredentials: true,
@@ -28,10 +28,9 @@ function App() {
         })
         .catch((err) => console.log("Pas de token ! " + err));
     };
-    getToken();
-
-    // si l'userId existe il y aura un dispatche de la fonction getUser et est mis à jour à chaque fois que la valeur de userId évolue
+    // si l'userId existe il y aura un dispatch de la fonction getUser et est mis à jour à chaque fois que la valeur de userId évolue
     if (userId) dispatch(getUser(userId));
+    getToken();
   }, [userId, dispatch]);
 
   return (
