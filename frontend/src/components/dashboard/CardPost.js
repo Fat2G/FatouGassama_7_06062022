@@ -22,8 +22,8 @@ const CardPosts = ({ post }) => {
     setIsUpdated(false);
   };
 
-  const deleteItem = (props) => {
-    dispatch(deletePost(props.id));
+  const deleteItem = () => {
+    dispatch(deletePost(post._id));
   };
 
   return (
