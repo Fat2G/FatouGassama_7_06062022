@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { isEmpty } from "../utils/IsEmpty";
 import { dateFormat } from "../utils/DateFormat";
 import LikeButton from "../profil/LikeButton";
-import { updatePost } from "../../actions/post.actions";
+import { updatePost, deletePost } from "../../actions/post.actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,6 +20,10 @@ const CardPosts = ({ post }) => {
       dispatch(updatePost(post._id, textUpdate));
     }
     setIsUpdated(false);
+  };
+
+  const deleteItem = (props) => {
+    dispatch(deletePost(props.id));
   };
 
   return (
@@ -78,7 +82,15 @@ const CardPosts = ({ post }) => {
                 icon={faPenToSquare}
                 onClick={() => setIsUpdated(!isUpdated)}
               />
-              <FontAwesomeIcon className="icon-del" icon={faTrashCan} />
+              <FontAwesomeIcon
+                className="icon-del"
+                icon={faTrashCan}
+                onClick={() => {
+                  if (window.confirm("Voulez-vous supprimer ce post?")) {
+                    deleteItem();
+                  }
+                }}
+              />
             </div>
           )}
         </div>
