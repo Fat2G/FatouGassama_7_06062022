@@ -1,6 +1,6 @@
 import { useState, React } from "react";
 import { useSelector } from "react-redux";
-import UploadImg from "../UploadImg";
+import UploadImg from "../profil/UploadImg";
 import ModalDelAccount from "../profil/ModalDelAccount";
 import { dateFormat } from "../utils/DateFormat";
 
