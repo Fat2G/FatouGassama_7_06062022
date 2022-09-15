@@ -11,7 +11,7 @@
 
   .user-img {
     height: 60px;
-      width: 60px;
+    width: 60px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0px 2px 5px 0px rgba(78, 81, 102, 0.25);
@@ -24,7 +24,7 @@
   }
 
   h2 {
-    font-size: 16px;
+    font-size: 18px;
     margin-left: 20px;
   }
 
@@ -33,7 +33,12 @@
   }
 }
 
-.like-container {
+h3 {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.update-container {
   display: flex;
   justify-content: space-between;
 }
@@ -67,20 +72,30 @@
   }
 }
 
-.like-icon {
-  padding: 5px;
-  border-radius: 5px;
-  background-color: $ter-col;
-  &:hover,
-  &:active {
-    color: $pri-col;
-  }
-}
-
-.like {
+.like-container {
   display: inline-flex;
   align-items: center;
   margin-right: 30px;
+}
+
+.like-icon,
+.unlike-icon {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: $ter-col;
+  color: $pri-col;
+  &:hover {
+    color: #fff;
+  }
+}
+
+.unlike-icon {
+  background-color: $ter-col;
+  color: #fff;
+  &:hover {
+    color: $pri-col;
+    
+  }
 }
 
 .like-num {
