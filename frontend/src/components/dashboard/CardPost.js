@@ -1,14 +1,26 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { isEmpty } from "../utils/IsEmpty";
 import { dateFormat } from "../utils/DateFormat";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons"; 
 import LikeButton from "../profil/LikeButton";
+import { updatePost } from "../../actions/post.actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const CardPosts = ({ post }) => {
+  const [isUpdated, setIsUpdated] = useState(false);
+  const [textUpdate, setTextUpdate] = useState(null);
   const usersData = useSelector((state) => state.usersReducer);
-  // const userData = useSelector((state) => state.userReducer);
+  const userData = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+
+  const updateItem = () => {
+    if (textUpdate) {
+      dispatch(updatePost(post._id, textUpdate));
+    }
+    setIsUpdated(false);
+  };
 
   return (
     <div key={post._id}>
@@ -38,7 +50,20 @@ const CardPosts = ({ post }) => {
                 .join("")}
           </h2>
         </div>
-        <p>{post.message}</p>
+        {isUpdated === false && <p>{post.message}</p>}
+        {isUpdated && (
+          <div className="update-post">
+            <textarea
+              defaultValue={post.message}
+              onChange={(e) => setTextUpdate(e.target.value)}
+            />
+            <div className="btn-container">
+              <button className="btn" onClick={updateItem}>
+                Modifier
+              </button>
+            </div>
+          </div>
+        )}
         {post.picture && (
           <img src={post.picture} alt="post img" className="post-img" />
         )}
@@ -46,10 +71,16 @@ const CardPosts = ({ post }) => {
         <hr />
         <div className="update-container">
           <LikeButton post={post} />
-          <div className="card-modifDel">
-            <FontAwesomeIcon className="icon-modif" icon={faPenToSquare} />
-            <FontAwesomeIcon className="icon-del" icon={faTrashCan} />
-          </div>
+          {userData._id === post.posterId && (
+            <div className="card-modifDel">
+              <FontAwesomeIcon
+                className="icon-modif"
+                icon={faPenToSquare}
+                onClick={() => setIsUpdated(!isUpdated)}
+              />
+              <FontAwesomeIcon className="icon-del" icon={faTrashCan} />
+            </div>
+          )}
         </div>
       </article>
     </div>
