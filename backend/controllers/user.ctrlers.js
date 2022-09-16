@@ -44,7 +44,6 @@ exports.deleteUser = (req, res) => {
   User.findOne({ _id: req.params.id }).then((user) => {
     // suppression de l'image
     const fileName = user.username + ".jpg";
-    console.log(fileName);
     if (fileName !== "defaultImg.jpg") {
       fs.unlink(
         `${__dirname}/../../frontend/public/uploads/profil/${fileName}`,
