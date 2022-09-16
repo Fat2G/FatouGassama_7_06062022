@@ -76,7 +76,7 @@ const CardPosts = ({ post }) => {
         <hr />
         <div className="update-container">
           <LikeButton post={post} />
-          {userData._id === post.posterId && (
+          {(userData._id === post.posterId || userData.admin === 1) && (
             <div className="card-modifDel">
               <FontAwesomeIcon
                 className="icon-modif"
