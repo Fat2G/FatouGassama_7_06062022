@@ -88,7 +88,8 @@ body.active-modal {
   margin-top: 0px;
 }
 
-.modal-icons {
+.modal-icons,
+.addImg-ctn {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -109,6 +110,11 @@ body.active-modal {
   display: none;
 }
 
+.addImg-message {
+  color: $sec-col;
+  font-size: 14px;
+  font-weight: 700;
+}
 .preview-img {
   height: 30px;
   width: auto;
