@@ -76,7 +76,8 @@ const ModalPost = () => {
           <div className="overlay"></div>
           <div className="modal-content">
             <div className="modal-icons">
-              <div>
+              <div className="addImg-ctn">
+                <span className="addImg-message">Ajouter une image</span>
                 <label htmlFor="file-post" className="addImg-modal">
                   <FontAwesomeIcon icon={faFolderPlus} />
                 </label>
