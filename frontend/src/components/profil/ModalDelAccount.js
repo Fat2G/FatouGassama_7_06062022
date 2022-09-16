@@ -30,7 +30,6 @@ const ModalDelAccount = () => {
     })
       .then((res) => {
         removeCookie("jwt");
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -46,7 +45,7 @@ const ModalDelAccount = () => {
       {modalDelAccount && (
         <div className="modal">
           <div className="overlay"></div>
-          <div className="modal-content">
+          <div className="modal-content modal-del">
             <h1 id="modal-title">Voulez-vous supprimer le compte ?</h1>
             <div className="btn-ctn btn-flex">
               <button type="button" className="btn" onClick={delUser}>
