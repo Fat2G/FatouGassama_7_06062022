@@ -1,6 +1,5 @@
 import { React, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "../utils/IsEmpty";
 import { dateFormat } from "../utils/DateFormat";
 import LikeButton from "../profil/LikeButton";
@@ -54,23 +53,25 @@ const CardPosts = ({ post }) => {
                 .join("")}
           </h2>
         </div>
-        {isUpdated === false && <p>{post.message}</p>}
-        {isUpdated && (
-          <div className="update-post">
-            <textarea
-              defaultValue={post.message}
-              onChange={(e) => setTextUpdate(e.target.value)}
-            />
-            <div className="btn-container">
-              <button className="btn" onClick={updateItem}>
-                Modifier
-              </button>
+        <div className="message">
+          {isUpdated === false && <p>{post.message}</p>}
+          {isUpdated && (
+            <div className="update-post">
+              <textarea
+                defaultValue={post.message}
+                onChange={(e) => setTextUpdate(e.target.value)}
+              />
+              <div className="btn-container">
+                <button className="btn btn-modif" onClick={updateItem}>
+                  Modifier
+                </button>
+              </div>
             </div>
-          </div>
-        )}
-        {post.picture && (
-          <img src={post.picture} alt="post img" className="post-img" />
-        )}
+          )}
+          {post.picture && (
+            <img src={post.picture} alt="post img" className="post-img" />
+          )}
+        </div>
         <h3> {dateFormat(post.createdAt)}</h3>
         <hr />
         <div className="update-container">
