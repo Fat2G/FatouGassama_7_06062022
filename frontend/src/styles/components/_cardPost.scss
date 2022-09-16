@@ -1,13 +1,14 @@
 .ctn-card {
   border-radius: 15px;
   padding: 20px;
-  margin: 15px 80px;
+  margin: 20px 100px;
   box-shadow: 0px 2px 5px 0px rgba(78, 81, 102, 0.25);
 }
 
 .card-header {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 
   .user-img {
     height: 60px;
@@ -36,6 +37,14 @@
 h3 {
   font-size: 14px;
   font-style: italic;
+}
+.message{
+  display: flex;
+  flex-direction: column;
+}
+.post-img{
+  margin: auto auto;
+  border-radius: 20px;
 }
 
 .update-container {
@@ -94,13 +103,36 @@ h3 {
   color: #fff;
   &:hover {
     color: $pri-col;
-    
   }
 }
 
 .like-num {
   font-weight: 700;
   margin: 0px 10px;
+}
+
+.update-post {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  textarea {
+    width: 95%;
+    height: 100px;
+    border: 1px solid $pri-col;
+    padding: 10px;
+    border-radius: 20px ;
+    resize: none;
+  }
+  .btn-container {
+    .btn {
+      background: $pri-col;
+      margin-top: 10px;
+    }
+    .btn-modif{
+      margin-bottom: 10px;
+    }
+  }
 }
 
 /* RESPONSIVE TABLET */
