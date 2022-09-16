@@ -1,32 +1,13 @@
-import { React, useState } from "react";
+import { React } from "react";
 import logo from "../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faCommentDots,
-  faCircleXmark,
-  faFolderPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ModalPost from "./dashboard/ModalPost";
 import Logout from "./auth/Logout";
 
 const NavBar = () => {
-  //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.
-  const [modalPost, setModalPost] = useState(false);
-
-  // puisque setModal est false il devient true et inversement
-  const toggleModalPost = () => {
-    setModalPost(!modalPost);
-  };
-
-  //On empêche de scroller lorsque le popup apparait avec un overflow-y: hidden en css
-  if (modalPost) {
-    document.body.classList.add("active-modal");
-  } else {
-    document.body.classList.remove("active-modal");
-  }
-
   //utilisation de redux pour récupérer les data de l'utilisateur
   const userData = useSelector((state) => state.userReducer);
 
@@ -41,11 +22,7 @@ const NavBar = () => {
             <p>Bienvenue {userData.username} ! </p>
           </div>
           <div className="icons">
-            <FontAwesomeIcon
-              className="icon-navbar icon-spe"
-              icon={faCommentDots}
-              onClick={toggleModalPost}
-            />
+            <ModalPost />
             <NavLink className="icon-spe" to="/profil">
               <FontAwesomeIcon className="icon-navbar" icon={faUser} />
             </NavLink>
@@ -53,39 +30,6 @@ const NavBar = () => {
           </div>
         </nav>
       </header>
-
-      {/* Implémentation du "short circuit condition" afin de montrer ou cacher les éléments lorsque la condition (modal) est remplie.
-      Peut etre considéré comme une version minifié d'un opérateur ternaire. */}
-      {modalPost && (
-        <div className="modal">
-          <div className="overlay"></div>
-          <div className="modal-content">
-            <div className="modal-icons">
-              {/* ajout de fichier image */}
-              <FontAwesomeIcon className="addImg-modal" icon={faFolderPlus} />
-              {/* fermeture du modal */}
-              <FontAwesomeIcon
-                className="close-modal"
-                onClick={toggleModalPost}
-                icon={faCircleXmark}
-              />
-            </div>
-
-            {/* message à publier */}
-            <textarea
-              id="post"
-              name="post"
-              rows="5"
-              cols="33"
-              placeholder="Que voulez-vous partager ?"
-              required
-            ></textarea>
-            <button type="button" className="btn btn-modal">
-              Publier
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
