@@ -35,6 +35,7 @@ module.exports.loginErrors = (err) => {
   return errors;
 };
 
+// Messages d'erreur qui sont retournés si besoin lors de la publication d'image
 module.exports.uploadErrors = (err) => {
   let errors = { format: "", maxSize: "" };
 
