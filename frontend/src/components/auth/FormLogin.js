@@ -10,7 +10,6 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import illustration from "../../assets/img/ill-login.png";
-import ModalPassword from "./ModalPassword";
 
 const FormLogin = () => {
   const [email, setEmail] = useState("");
@@ -50,15 +49,6 @@ const FormLogin = () => {
       setIcon(faEyeSlash);
       setType("password");
     }
-  };
-
-  /* Modal */
-  //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.
-  const [modalPwd, setModalPwd] = useState(false);
-
-  // puisque setModal est false il devient true et inversement
-  const toggleModalPwd = () => {
-    setModalPwd(!modalPwd);
   };
 
   return (
@@ -104,12 +94,6 @@ const FormLogin = () => {
                 <FontAwesomeIcon icon={icon} onClick={handleTogglePassword} />
               </div>
               <div className="error-message error"></div>
-              <div className="flex">
-                <p>Mot de passe oublié ?</p>
-                <button type="button" className="link" onClick={toggleModalPwd}>
-                  Cliquez ici
-                </button>
-              </div>
             </div>
             <div className="btn-ctn">
               <input type="submit" value="Se connecter" className="btn" />
@@ -123,10 +107,6 @@ const FormLogin = () => {
           </form>
         </section>
       </main>
-
-      {/* Implémentation du "short circuit condition" afin de montrer ou cacher les éléments lorsque la condition (modal) est remplie.
-      Peut etre considéré comme une version minifiée d'un opérateur ternaire. */}
-      {modalPwd && <ModalPassword />}
     </div>
   );
 };
