@@ -2,10 +2,13 @@ import { React, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "../utils/IsEmpty";
 import { dateFormat } from "../utils/DateFormat";
-import LikeButton from "../profil/LikeButton";
+import LikeButton from "./LikeButton";
 import { updatePost, deletePost } from "../../actions/post.actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrashCan,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
 const CardPosts = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
