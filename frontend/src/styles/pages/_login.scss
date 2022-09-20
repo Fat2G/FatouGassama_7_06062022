@@ -4,6 +4,10 @@ body.login {
       url(../../assets/img/bgs/bg_login_R.png);
   }
   overflow: hidden;
+  
+  input.btn {
+    margin-top: 10px;
+  }
 }
 
 body {
@@ -126,7 +130,7 @@ input.btn {
 }
 
 /* Message d'erreur */
-.error{
+.error {
   color: #fd2d01;
   font-weight: 700;
   font-size: 14px;
