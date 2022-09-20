@@ -61,7 +61,7 @@ module.exports.createPost = async (req, res) => {
 
 // modification des posts
 module.exports.updatePost = (req, res) => {
-  if (!ObjectId.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id) || User.admin === 0)
     return res.status(400).send("ID non connu : " + req.params.id);
 
   const updatedPost = {
@@ -81,7 +81,7 @@ module.exports.updatePost = (req, res) => {
 
 // suppression des posts
 module.exports.deletePost = (req, res) => {
-  if (!ObjectId.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id) || User.admin === 0)
     return res.status(400).send("ID inconnu : " + req.params.id);
 
   Post.findByIdAndRemove(req.params.id, (err, docs) => {
