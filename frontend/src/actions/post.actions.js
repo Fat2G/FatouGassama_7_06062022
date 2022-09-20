@@ -6,6 +6,8 @@ export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
+export const GET_POSTS_ERRORS = "GET_POSTS_ERRORS";
+
 
 export const getPosts = () => {
   return (dispatch) => {
@@ -22,6 +24,11 @@ export const addPost = (data) => {
   return (dispatch) => {
     return axios
       .post(`${process.env.REACT_APP_API_URL}/api/post/`, data)
+      .then((res) => {
+        if (res.data.errors) {
+          dispatch({type: GET_POSTS_ERRORS, payload: res.data.errors})
+        }
+      })
   };
 };
 
