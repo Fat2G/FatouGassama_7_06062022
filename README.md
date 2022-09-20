@@ -60,9 +60,10 @@ A la racine du dossier "backend", veuillez créer un ficher `.env` en suivant l'
 
 #### 6. Environnement de développement ####
 
-- Utilisation du runtime **Node.js**
-- Utilisation du framework **Express**
 - Utilisation de **MongoDB** pour l'hébergement et la gestion de la base de données
+- Utilisation du framework **Express**
+- Utilisation du framework frontend **React**
+- Utilisation du runtime **Node.js**
 
 
 #### 7. Dépendances utilisées dans le frontend ####
