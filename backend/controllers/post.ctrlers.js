@@ -11,7 +11,7 @@ module.exports.readPost = (req, res) => {
   Post.find((err, docs) => {
     if (!err) res.send(docs);
     else console.log("Pas de data : " + err);
-  });
+  }).sort({ createdAt: -1 });
 };
 
 // création de posts
@@ -90,7 +90,7 @@ module.exports.deletePost = (req, res) => {
   });
 
   // suppression de l'image
-  /* Post.findOne({ _id: req.params.id }).then((post) => {
+  Post.findOne({ _id: req.params.id }).then((post) => {
     const fileName = req.body.posterId + Date.now() + ".jpg";
     fs.unlink(
       `${__dirname}/../../frontend/public/uploads/posts/${fileName}`,
@@ -98,11 +98,9 @@ module.exports.deletePost = (req, res) => {
         Post.deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: "Image supprimée !" }))
           .catch((error) => res.status(400).json({ error }));
-
       }
     );
-  }); */
-  
+  });
 };
 
 // ajout de likes
