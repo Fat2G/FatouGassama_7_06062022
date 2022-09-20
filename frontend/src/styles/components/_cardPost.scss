@@ -38,11 +38,13 @@ h3 {
   font-size: 14px;
   font-style: italic;
 }
-.message{
+
+.message {
   display: flex;
   flex-direction: column;
 }
-.post-img{
+
+.post-img {
   margin: auto auto;
   border-radius: 20px;
 }
@@ -50,6 +52,7 @@ h3 {
 .update-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .icon-modif,
@@ -121,7 +124,7 @@ h3 {
     height: 100px;
     border: 1px solid $pri-col;
     padding: 10px;
-    border-radius: 20px ;
+    border-radius: 20px;
     resize: none;
   }
   .btn-container {
@@ -129,7 +132,7 @@ h3 {
       background: $pri-col;
       margin-top: 10px;
     }
-    .btn-modif{
+    .btn-modif {
       margin-bottom: 10px;
     }
   }
@@ -174,4 +177,13 @@ h3 {
   p {
     font-size: 14px;
   }
+
+  .post-img {
+  margin: 0px 0px;
+}
+
+h3 {
+  font-size: 12px;
+  
+}
 }

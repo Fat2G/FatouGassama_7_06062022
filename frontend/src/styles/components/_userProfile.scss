@@ -1,6 +1,6 @@
 body.profile {
   h1 {
-    margin: 20px 0px;
+    margin: 15px 0px;
     color: $ter-col;
   }
 
@@ -18,7 +18,7 @@ body.profile {
     display: grid;
     justify-items: center;
     border-radius: 20px;
-    padding: 40px;
+    padding: 30px;
     margin: 0px 30px;
   }
 
@@ -29,7 +29,7 @@ body.profile {
     border-radius: 10%;
     margin-bottom: 20px;
 
-    img{
+    img {
       object-position: -40px -40px;
     }
   }
@@ -45,7 +45,7 @@ body.profile {
     font-weight: 700;
     padding: 10px;
     border-radius: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
 
@@ -82,5 +82,17 @@ body.profile {
   h2,
   h3 {
     margin: 10px 0;
+  }
+
+  p{
+    margin: 5px 0px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+  body.profile{
+    h1{
+      font-size: 20px;
+    }
   }
 }
