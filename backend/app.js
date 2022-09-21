@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "same-site" }));
 
 // Vérification des utilisateurs
 app.get("*", userCtrl.checkToken);
@@ -57,7 +57,5 @@ app.get("/jwt", auth, (req, res) => {
 // Routes
 app.use("/api/auth", userRoutes);
 app.use("/api/post", postRoutes);
-
-app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
