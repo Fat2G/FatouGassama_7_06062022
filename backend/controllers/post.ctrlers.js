@@ -67,7 +67,7 @@ module.exports.updatePost = (req, res) => {
   const updatedPost = {
     message: req.body.message,
   };
-
+  
   Post.findByIdAndUpdate(
     req.params.id,
     { $set: updatedPost },
@@ -84,19 +84,15 @@ module.exports.deletePost = (req, res) => {
   if (!ObjectId.isValid(req.params.id) || User.admin === 0)
     return res.status(400).send("ID inconnu : " + req.params.id);
 
-  Post.findByIdAndRemove(req.params.id, (err, docs) => {
-    if (!err) res.send(docs);
-    else console.log("Delete error : " + err);
-  });
-
-  // suppression de l'image
   Post.findOne({ _id: req.params.id }).then((post) => {
-    const fileName = req.body.posterId + Date.now() + ".jpg";
+    // suppression de l'image statique
+    const fileName = post.picture.split("./uploads/posts/")[1];
     fs.unlink(
       `${__dirname}/../../frontend/public/uploads/posts/${fileName}`,
-      (err) => {
+      () => {
+        // suppression du post dans MongoDB
         Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: "Image supprimée !" }))
+          .then(() => res.status(200).json({ message: "Post supprimé !" }))
           .catch((error) => res.status(400).json({ error }));
       }
     );
