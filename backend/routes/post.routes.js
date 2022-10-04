@@ -9,7 +9,7 @@ const upload = multer();
 //CRUD
 router.get("/", postCtrl.readPost);
 router.post("/", upload.single('file'), postCtrl.createPost);
-router.put("/:id", postCtrl.updatePost);
+router.put("/:id", upload.single("file"), postCtrl.updatePost);
 router.delete("/:id", postCtrl.deletePost);
 
 //likes
