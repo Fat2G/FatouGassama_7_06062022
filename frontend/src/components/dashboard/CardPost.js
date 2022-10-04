@@ -6,6 +6,7 @@ import LikeButton from "./LikeButton";
 import { updatePost, deletePost } from "../../actions/post.actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faFolderPlus,
   faTrashCan,
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
@@ -13,19 +14,33 @@ import {
 const CardPosts = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
+  const [file, setFile] = useState();
+  const [postPic, setPostPic] = useState(null);
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const updateItem = () => {
-    if (textUpdate) {
-      dispatch(updatePost(post._id, textUpdate));
+    if (textUpdate || file) {
+      const data = new FormData();
+      data.append("message", textUpdate);
+      data.append("file", file);
+      dispatch(updatePost(post._id, data));
+      setTimeout(function () {
+        window.location.reload();
+      });
     }
     setIsUpdated(false);
   };
 
   const deleteItem = () => {
     dispatch(deletePost(post._id));
+  };
+
+  // prise en charge de l'image à envoyer
+  const handlePic = (e) => {
+    setPostPic(URL.createObjectURL(e.target.files[0]));
+    setFile(e.target.files[0]);
   };
 
   return (
@@ -36,24 +51,26 @@ const CardPosts = ({ post }) => {
             <img
               src={
                 !isEmpty(usersData[0]) &&
-                usersData
-                  .map((user) => {
-                    if (user._id === post.posterId) return user.picture;
-                    else return null;
-                  })
-                  .join("")
+                usersData.reduce(
+                  (lastValue, currentUser) =>
+                    currentUser._id === post.posterId
+                      ? currentUser.picture
+                      : lastValue,
+                  "./uploads/profil/defaultImg.jpg"
+                )
               }
               alt="img utilisateur"
             />
           </div>
           <h2>
             {!isEmpty(usersData[0]) &&
-              usersData
-                .map((user) => {
-                  if (user._id === post.posterId) return user.username;
-                  else return null;
-                })
-                .join("")}
+              usersData.reduce(
+                (lastValue, currentUser) =>
+                  currentUser._id === post.posterId
+                    ? currentUser.username
+                    : lastValue,
+                "Anonyme"
+              )}
           </h2>
         </div>
         <div className="message">
@@ -64,6 +81,24 @@ const CardPosts = ({ post }) => {
                 defaultValue={post.message}
                 onChange={(e) => setTextUpdate(e.target.value)}
               />
+              <div className="icon">
+                <>
+                  <div className="addImg-ctn">
+                    <span className="addImg-message">Ajouter une image</span>
+                    <label htmlFor="file-post" className="addImg-modal">
+                      <FontAwesomeIcon icon={faFolderPlus} />
+                    </label>
+                    <input
+                      type="file"
+                      id="file-post"
+                      name="file"
+                      accept=".jpg, .jpeg, .png"
+                      onChange={(e) => handlePic(e)}
+                    />
+                    <img src={postPic} alt="" className="preview-img" />
+                  </div>
+                </>
+              </div>
               <div className="btn-container">
                 <button className="btn btn-modif" onClick={updateItem}>
                   Modifier
