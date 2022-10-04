@@ -31,7 +31,7 @@ const ModalPost = () => {
     setFile(e.target.files[0]);
   };
 
-  // envoie du post
+  // envoi du post
   const handlePost = async (e) => {
     if (message || file) {
       const data = new FormData();
@@ -39,9 +39,18 @@ const ModalPost = () => {
       data.append("message", message);
       if (file) data.append("file", file);
 
-      await dispatch(addPost(data));
-      dispatch(getPosts());
-      cancelPost();
+      const errorMessage = document.querySelector(".error-message");
+      if (!isEmpty(error.maxSize)) {
+        errorMessage.innerHTML = error.maxSize;
+      } else if (!isEmpty(error.format)) {
+        errorMessage.innerHTML = error.format;
+      } else {
+        await dispatch(addPost(data));
+        dispatch(getPosts());
+        await cancelPost();
+        
+      }
+     
     } else {
       alert("Veuillez entrer un message et/ou une image.");
     }
@@ -106,6 +115,7 @@ const ModalPost = () => {
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
               ></textarea>
+              <div className="error-message error"></div>
               <div className="bnt-post">
                 <button
                   type="button"
@@ -124,8 +134,9 @@ const ModalPost = () => {
                 ) : null}
               </div>
             </div>
-            {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
-            {!isEmpty(error.format) && <p>{error.format}</p>}
+
+            {/* {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
+            {!isEmpty(error.format) && <p>{error.format}</p>} */}
           </div>
         </div>
       )}
