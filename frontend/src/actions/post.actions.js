@@ -8,7 +8,6 @@ export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 export const GET_POSTS_ERRORS = "GET_POSTS_ERRORS";
 
-
 export const getPosts = () => {
   return (dispatch) => {
     return axios
@@ -26,9 +25,9 @@ export const addPost = (data) => {
       .post(`${process.env.REACT_APP_API_URL}/api/post/`, data)
       .then((res) => {
         if (res.data.errors) {
-          dispatch({type: GET_POSTS_ERRORS, payload: res.data.errors})
+          dispatch({ type: GET_POSTS_ERRORS, payload: res.data.errors });
         }
-      })
+      });
   };
 };
 
@@ -60,15 +59,16 @@ export const unlikePost = (postId, userId) => {
   };
 };
 
-export const updatePost = (postId, message) => {
+export const updatePost = (postId, data) => {
   return (dispatch) => {
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_URL}/api/post/${postId}`,
-      data: { message },
+      data: data,
+      withCredentials: true,
     })
       .then((res) => {
-        dispatch({ type: UPDATE_POST, payload: { message, postId } });
+        dispatch({ type: UPDATE_POST, payload: { data, postId } });
       })
       .catch((err) => console.log(err));
   };
@@ -79,6 +79,7 @@ export const deletePost = (postId) => {
     return axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_URL}/api/post/${postId}`,
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: DELETE_POST, payload: { postId } });
