@@ -66,7 +66,7 @@ exports.checkToken = (req, res, next) => {
     jwt.verify(token, secretToken, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null;
-        next();
+        res.cookie("jwt", "", { maxAge: 1 });
       } else {
         let user = await User.findById(decodedToken.id);
         res.locals.user = user;
