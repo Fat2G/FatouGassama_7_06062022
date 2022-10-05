@@ -107,14 +107,18 @@ body.active-modal {
 }
 
 #file-post {
-  display: none;
+  display: none
 }
 
-.addImg-message {
+.addImg-message, .addImg-message-update {
   color: $sec-col;
   font-size: 14px;
   font-weight: 700;
 }
+.addImg-message-update{
+  color: $ter-col;
+}
+
 .preview-img {
   height: 30px;
   width: auto;
