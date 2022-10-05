@@ -3,7 +3,6 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const path = require("path");
 const helmet = require("helmet");
 
 //import du routeur utilisateur
@@ -52,7 +51,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "same-site" }));
 app.get("*", userCtrl.checkToken);
 app.get("/jwt", auth, (req, res) => {
   res.status(200).send(res.locals.user._id);
-});
+}); 
 
 // Routes
 app.use("/api/auth", userRoutes);
