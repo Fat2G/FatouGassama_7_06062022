@@ -33,6 +33,7 @@ const CardPosts = ({ post }) => {
     setIsUpdated(false);
   };
 
+  // suppression du post
   const deleteItem = () => {
     dispatch(deletePost(post._id));
   };
@@ -84,7 +85,7 @@ const CardPosts = ({ post }) => {
               <div className="icon">
                 <>
                   <div className="addImg-ctn">
-                    <span className="addImg-message">Ajouter une image</span>
+                    <span className="addImg-message-update">Ajouter une image</span>
                     <label htmlFor="file-post" className="addImg-modal">
                       <FontAwesomeIcon icon={faFolderPlus} />
                     </label>
