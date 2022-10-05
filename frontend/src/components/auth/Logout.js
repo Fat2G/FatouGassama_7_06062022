@@ -1,5 +1,4 @@
 import React from "react";
-// require("dotenv").config();
 import axios from "axios";
 import cookie from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
