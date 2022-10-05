@@ -60,23 +60,49 @@ module.exports.createPost = async (req, res) => {
 };
 
 // modification des posts
-module.exports.updatePost = (req, res) => {
-  if (!ObjectId.isValid(req.params.id) || User.admin === 0)
+module.exports.updatePost = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id) || User.admin === 0) {
     return res.status(400).send("ID non connu : " + req.params.id);
-
-  const updatedPost = {
-    message: req.body.message,
-  };
-  
-  Post.findByIdAndUpdate(
-    req.params.id,
-    { $set: updatedPost },
-    { new: true },
-    (err, docs) => {
-      if (!err) res.send(docs);
-      else console.log("Update error : " + err);
+  } else {
+    const updatedPost = {};
+    if (req.body.message && req.body.message !== "null") {
+      updatedPost.message = req.body.message;
     }
-  );
+    if (req.file) {
+      // Façon dont seront nommées les images en format jpg
+      let newFileName = Date.now() + "_" + req.file.originalName;
+      // création stockage des images en statique
+      await pipeline(
+        req.file.stream,
+        // chemin où sont stockées les images
+        fs.createWriteStream(
+          `${__dirname}/../../frontend/public/uploads/posts/${newFileName}`
+        )
+      );
+      updatedPost.picture = `./uploads/posts/${newFileName}`;
+    }
+    // update des nouvelles données dans la base de données
+    Post.findByIdAndUpdate(
+      req.params.id,
+      { $set: updatedPost },
+      { new: true },
+      (err, docs) => {
+        if (!err) res.send(docs);
+        else console.log("Update error : " + err);
+      }
+    )
+    // .catch((error) => res.status(400).json({ error }));
+    /* Post.findOne({ _id: req.params.id })
+    .then((post) => {
+      // suppression de l'image statique originale du post
+      const fileName = post.picture.split("./uploads/posts/")[1];
+      fs.unlink(`${__dirname}/../../frontend/public/uploads/posts/${fileName}`),
+        () => {
+          
+        };
+    })
+    .catch((error) => res.status(400).json({ error })); */
+  }
 };
 
 // suppression des posts
