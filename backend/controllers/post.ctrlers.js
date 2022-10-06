@@ -69,9 +69,22 @@ module.exports.updatePost = async (req, res) => {
       updatedPost.message = req.body.message;
     }
     if (req.file) {
-      // Façon dont seront nommées les images en format jpg
+      // suppression de l'image qui est mise à jour
+      Post.findOne({ _id: req.params.id }).then((post) => {
+        // suppression de l'image statique originale du post
+        const fileName = post.picture.split("./uploads/posts/")[1];
+        fs.unlinkSync(
+          `${__dirname}/../../frontend/public/uploads/posts/${fileName}`
+        ),
+          (err) => {
+            if (err) throw err;
+            console.log("Image supprimée !");
+          };
+      });
+
+      // Nommage de l'image en format jpg
       let newFileName = Date.now() + "_" + req.file.originalName;
-      // création stockage des images en statique
+      // création de l'image en statique
       await pipeline(
         req.file.stream,
         // chemin où sont stockées les images
@@ -79,9 +92,10 @@ module.exports.updatePost = async (req, res) => {
           `${__dirname}/../../frontend/public/uploads/posts/${newFileName}`
         )
       );
+
       updatedPost.picture = `./uploads/posts/${newFileName}`;
     }
-    // update des nouvelles données dans la base de données
+    // mise à jour des nouvelles données dans MongoDB
     Post.findByIdAndUpdate(
       req.params.id,
       { $set: updatedPost },
@@ -90,18 +104,7 @@ module.exports.updatePost = async (req, res) => {
         if (!err) res.send(docs);
         else console.log("Update error : " + err);
       }
-    )
-    // .catch((error) => res.status(400).json({ error }));
-    /* Post.findOne({ _id: req.params.id })
-    .then((post) => {
-      // suppression de l'image statique originale du post
-      const fileName = post.picture.split("./uploads/posts/")[1];
-      fs.unlink(`${__dirname}/../../frontend/public/uploads/posts/${fileName}`),
-        () => {
-          
-        };
-    })
-    .catch((error) => res.status(400).json({ error })); */
+    );
   }
 };
 
