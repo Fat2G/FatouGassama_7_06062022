@@ -42,7 +42,6 @@ const FormSignup = () => {
           setFormSubmit(true);
         })
         .catch(({ response: err }) => {
-          console.log("error message " + err);
           if (err.data.errors) {
             emailError.innerHTML = err.data.errors.email;
             passwordError.innerHTML = err.data.errors.password;
