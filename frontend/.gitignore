@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/public/uploads/posts/*
+/public/uploads/profil/*
 /.pnp
 .pnp.js
 
