@@ -6,7 +6,7 @@ const fs = require("fs");
 const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
 
-// liste des posts
+// liste des posts avec tri du plus récent au plus ancient
 module.exports.readPost = (req, res) => {
   Post.find((err, docs) => {
     if (!err) res.send(docs);
@@ -30,7 +30,7 @@ module.exports.createPost = async (req, res) => {
       if (req.file.size > 500000) throw Error("max size");
     } catch (err) {
       const errors = uploadErrors(err);
-      return res.status(201).json({ errors });
+      return res.status(400).json({ errors });
     }
     // Façon dont seront nommées les images en format jpg
     fileName = req.body.posterId + Date.now() + ".jpg";
@@ -73,14 +73,32 @@ module.exports.updatePost = async (req, res) => {
       Post.findOne({ _id: req.params.id }).then((post) => {
         // suppression de l'image statique originale du post
         const fileName = post.picture.split("./uploads/posts/")[1];
-        fs.unlinkSync(
-          `${__dirname}/../../frontend/public/uploads/posts/${fileName}`
-        ),
-          (err) => {
-            if (err) throw err;
-            console.log("Image supprimée !");
-          };
+        if (
+          fs.existsSync`${__dirname}/../../frontend/public/uploads/posts/${fileName}`
+        ) {
+          fs.unlinkSync(
+            `${__dirname}/../../frontend/public/uploads/posts/${fileName}`
+          ),
+            (err) => {
+              if (err) throw err;
+              console.log("Image supprimée !");
+            };
+        }
       });
+
+      try {
+        if (
+          req.file.detectedMimeType != "image/jpg" &&
+          req.file.detectedMimeType != "image/png" &&
+          req.file.detectedMimeType != "image/jpeg"
+        )
+          throw Error("invalid file");
+
+        if (req.file.size > 500000) throw Error("max size");
+      } catch (err) {
+        const errors = uploadErrors(err);
+        return res.status(400).json({ errors });
+      }
 
       // Nommage de l'image en format jpg
       let newFileName = Date.now() + "_" + req.file.originalName;
@@ -101,8 +119,12 @@ module.exports.updatePost = async (req, res) => {
       { $set: updatedPost },
       { new: true },
       (err, docs) => {
-        if (!err) res.send(docs);
-        else console.log("Update error : " + err);
+        if (!err) {
+          res.send(docs);
+        } else {
+          const errors = uploadErrors(err);
+          return res.status(400).json({ errors });
+        }
       }
     );
   }
