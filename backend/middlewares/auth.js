@@ -1,17 +1,37 @@
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
 
-const secretToken = process.env.SECRET_TOKEN;
+module.exports.checkToken = (req, res, next) => {
+  const token = req.cookies.jwt;
 
-//export du middleware d'authentification
-module.exports = (req, res, next) => {
+  if (token) {
+    // console.log("token " + token);
+    jwt.verify(token, process.env.SECRET_TOKEN, async (err, decodedToken) => {
+      if (err) {
+        res.locals.user = null;
+        res.cookie("jwt", "", { maxAge: 1 });
+      } else {
+        let user = await User.findById(decodedToken.id);
+        res.locals.user = user;
+        next();
+      }
+    });
+  } else {
+    res.status(401).json({ message: "Utilisateur inconnu !" });
+    res.locals.user = null;
+    next();
+  }
+};
+
+exports.requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, secretToken, (err, decodedToken) => {
+    jwt.verify(token, process.env.SECRET_TOKEN, async (err, decodedToken) => {
       if (err) {
-        res.send(200).json(err);
+        console.log(err);
+        res.send(200).json("Pas de token");
       } else {
-        console.log("decodedtoken "+ decodedToken.id);
+        console.log("auth ok " + decodedToken.id);
         next();
       }
     });
