@@ -5,15 +5,16 @@ const router = express.Router();
 const postCtrl = require("../controllers/post.ctrlers");
 const multer = require("multer");
 const upload = multer();
+const { checkToken } = require("../middlewares/auth");
 
 //CRUD
-router.get("/", postCtrl.readPost);
-router.post("/", upload.single('file'), postCtrl.createPost);
-router.put("/:id", upload.single("file"), postCtrl.updatePost);
-router.delete("/:id", postCtrl.deletePost);
+router.get("/", checkToken, postCtrl.readPost);
+router.post("/", checkToken, upload.single("file"), postCtrl.createPost);
+router.put("/:id", checkToken, upload.single("file"), postCtrl.updatePost);
+router.delete("/:id", checkToken, postCtrl.deletePost); 
 
 //likes
-router.patch("/like-post/:id", postCtrl.likePost);
-router.patch("/unlike-post/:id", postCtrl.unlikePost);
+router.patch("/like-post/:id", checkToken, postCtrl.likePost);
+router.patch("/unlike-post/:id", checkToken, postCtrl.unlikePost);
 
 module.exports = router;

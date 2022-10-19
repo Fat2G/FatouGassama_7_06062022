@@ -8,7 +8,7 @@ const uploadCtrl = require("../controllers/uploadPic.ctrlers");
 const email = require("../middlewares/email");
 const password = require("../middlewares/password");
 const connection = require("../middlewares/connection");
-const auth = require("../middlewares/auth");
+const { checkToken } = require("../middlewares/auth");
 const multer = require("multer");
 const upload = multer();
 
@@ -17,16 +17,15 @@ const upload = multer();
 // authentification
 router.post("/signup", email, password, authCtrl.signup);
 router.post("/login", connection, authCtrl.login);
-router.get("/logout", auth, authCtrl.logout);
+router.get("/logout", authCtrl.logout);
 
 // utilisateur
-router.get("/", userCtrl.getAllUsers);
-router.get("/:id", userCtrl.userId);
-router.get("/:id", auth, userCtrl.getUser);
-router.get("/jwt", userCtrl.checkToken);
+router.get("/", checkToken, userCtrl.getAllUsers);
+router.get("/:id", checkToken, userCtrl.userId);
+router.get("/:id", checkToken, userCtrl.getUser);
 
 // profil
-router.delete("/:id", auth, userCtrl.deleteUser);
-router.post("/upload", upload.single('file'), uploadCtrl.uploadPic);
+router.delete("/:id", checkToken, userCtrl.deleteUser);
+router.post("/upload", checkToken, upload.single("file"), uploadCtrl.uploadPic);
 // export du routeur
 module.exports = router;
