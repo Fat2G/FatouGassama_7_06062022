@@ -1,11 +1,7 @@
 // Imports
-const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
-
-// Variables d'environnement
-const secretToken = process.env.SECRET_TOKEN;
 
 // Recherche d'un utilisateur selon son id
 exports.getUser = (req, res) => {
@@ -48,6 +44,7 @@ exports.deleteUser = (req, res) => {
       fs.unlink(
         `${__dirname}/../../frontend/public/uploads/profil/${fileName}`,
         () => {
+          // suppression du compte utiliseur dans la base de données
           User.deleteOne({ _id: req.params.id })
             .then(() =>
               res.status(200).json({ message: "Utilisateur supprimé !" })
@@ -57,24 +54,4 @@ exports.deleteUser = (req, res) => {
       );
     }
   });
-};
-
-// Controle du token utilisateur du token
-exports.checkToken = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, secretToken, async (err, decodedToken) => {
-      if (err) {
-        res.locals.user = null;
-        res.cookie("jwt", "", { maxAge: 1 });
-      } else {
-        let user = await User.findById(decodedToken.id);
-        res.locals.user = user;
-        next();
-      }
-    });
-  } else {
-    res.locals.user = null;
-    next();
-  }
 };
