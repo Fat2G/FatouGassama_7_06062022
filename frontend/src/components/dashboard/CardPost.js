@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 import { isEmpty } from "../utils/IsEmpty";
 import { dateFormat } from "../utils/DateFormat";
 import LikeButton from "./LikeButton";
@@ -20,18 +21,39 @@ const CardPosts = ({ post }) => {
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-  const updateItem = () => {
+  const updateItem = (postId) => {
+    // messages d'erreur
+    const maxSizeError = document.querySelector(".maxSize-error");
+    const formatError = document.querySelector(".format-error");
+    postId = post._id;
+
     if (textUpdate || file) {
       const data = new FormData();
       data.append("message", textUpdate);
       data.append("file", file);
-      dispatch(updatePost(post._id, data));
-      setTimeout(function () {
-        window.location.reload();
-      });
-    }
-    setIsUpdated(false);
-  };
+      
+      axios({
+        method: "put",
+        url: `${process.env.REACT_APP_API_URL}/api/post/${postId}`,
+        withCredentials: true,
+        data: data,
+      })
+        .then(() => {
+          dispatch(updatePost(post._id, data));
+          setTimeout(function () {
+            window.location.reload();
+          });
+        })
+        .catch(({ response: err }) => {
+          if (err.data.errors) {
+            maxSizeError.innerHTML = err.data.errors.maxSize;
+            formatError.innerHTML = err.data.errors.format;
+          }
+        });
+    } else {
+      setIsUpdated(false);
+    } 
+  }  
 
   // suppression du post
   const deleteItem = () => {
@@ -85,7 +107,9 @@ const CardPosts = ({ post }) => {
               <div className="icon">
                 <>
                   <div className="addImg-ctn">
-                    <span className="addImg-message-update">Ajouter une image</span>
+                    <span className="addImg-message-update">
+                      Ajouter une image
+                    </span>
                     <label htmlFor="file-post" className="addImg-modal">
                       <FontAwesomeIcon icon={faFolderPlus} />
                     </label>
@@ -100,6 +124,8 @@ const CardPosts = ({ post }) => {
                   </div>
                 </>
               </div>
+              <div className="format-error error"></div>
+              <div className="maxSize-error  error"></div>
               <div className="btn-container">
                 <button className="btn btn-modif" onClick={updateItem}>
                   Modifier

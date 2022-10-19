@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, getPosts } from "../../actions/post.actions";
-import { isEmpty } from "../utils/IsEmpty";
+import axios from "axios";
+import { getPosts } from "../../actions/post.actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentDots,
@@ -22,7 +22,6 @@ const ModalPost = () => {
   };
   // redux
   const userData = useSelector((state) => state.userReducer);
-  const error = useSelector((state) => state.errorReducer.postError);
   const dispatch = useDispatch();
 
   // prise en charge de l'image à envoyer
@@ -33,24 +32,32 @@ const ModalPost = () => {
 
   // envoi du post
   const handlePost = async (e) => {
+    // messages d'erreur
+    const maxSizeError = document.querySelector(".maxSize-error");
+    const formatError = document.querySelector(".format-error");
+
     if (message || file) {
       const data = new FormData();
       data.append("posterId", userData._id);
       data.append("message", message);
       if (file) data.append("file", file);
-
-      const errorMessage = document.querySelector(".error-message");
-      if (!isEmpty(error.maxSize)) {
-        errorMessage.innerHTML = error.maxSize;
-      } else if (!isEmpty(error.format)) {
-        errorMessage.innerHTML = error.format;
-      } else {
-        await dispatch(addPost(data));
-        dispatch(getPosts());
-        await cancelPost();
-        
-      }
-     
+      
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/api/post/`,
+        withCredentials: true,
+        data: data,
+      })
+        .then(() => {
+          dispatch(getPosts());
+          cancelPost();
+        })
+        .catch(({ response: err }) => {
+          if (err.data.errors) {
+            maxSizeError.innerHTML = err.data.errors.maxSize;
+            formatError.innerHTML = err.data.errors.format;
+          }
+        });
     } else {
       alert("Veuillez entrer un message et/ou une image.");
     }
@@ -115,7 +122,8 @@ const ModalPost = () => {
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
               ></textarea>
-              <div className="error-message error"></div>
+              <div className="format-error error"></div>
+              <div className="maxSize-error  error"></div>
               <div className="bnt-post">
                 <button
                   type="button"
@@ -134,9 +142,6 @@ const ModalPost = () => {
                 ) : null}
               </div>
             </div>
-
-            {/* {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
-            {!isEmpty(error.format) && <p>{error.format}</p>} */}
           </div>
         </div>
       )}
