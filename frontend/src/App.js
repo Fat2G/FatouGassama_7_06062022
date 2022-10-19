@@ -20,7 +20,7 @@ function App() {
     const getToken = async() => {
       await axios({
         method: "get",
-        url: `${process.env.REACT_APP_API_URL}/jwt`,
+        url: `${process.env.REACT_APP_API_URL}/jwtid`,
         withCredentials: true,
       })
         .then((res) => {
@@ -28,9 +28,9 @@ function App() {
         })
         .catch((err) => console.log("Pas de token ! " + err));
     };
-    // si l'userId existe il y aura un dispatch de la fonction getUser et est mis à jour à chaque fois que la valeur de userId évolue
-    if (userId) dispatch(getUser(userId));
     getToken();
+    // si l'userId existe il y aura un dispatch de la fonction getUser et est mis à jour à chaque fois que la valeur de userId évolue
+    if (userId) dispatch(getUser(userId));    
   }, [userId, dispatch]);
 
   return (
