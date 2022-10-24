@@ -4,14 +4,14 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const helmet = require("helmet");
+const path = require("path");
 
 //import du routeur utilisateur
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
 
 //import des middlewares
-const userCtrl = require("./controllers/user.ctrlers");
-const auth = require("./middlewares/auth");
+const { checkTokenUser, requireAuth } = require("./middlewares/auth");
 
 const dbUserName = process.env.DB_USERNAME;
 const dbPassword = process.env.DB_PASSWORD;
@@ -48,10 +48,12 @@ app.use(cookieParser());
 app.use(helmet.crossOriginResourcePolicy({ policy: "same-site" }));
 
 // Vérification des utilisateurs
-app.get("*", userCtrl.checkToken);
-app.get("/jwt", auth, (req, res) => {
+app.get("*", checkTokenUser);
+app.get("/jwtid", requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id);
-}); 
+});
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/api/auth", userRoutes);
