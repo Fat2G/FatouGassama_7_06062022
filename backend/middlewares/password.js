@@ -15,7 +15,7 @@ schemaValidator
 
 module.exports = (req, res, next) => {
   if (!schemaValidator.validate(req.body.password)){
-    return res.status(404).json({ message:"Le mot de passe doit contenir entre 6 et 20 caractères, avec au moins un chiffre et une majuscule !" });
+    return res.status(404).json({ message:"Le mot de passe doit contenir entre 6 et 20 caractères, avec au moins deux chiffres et une majuscule !" });
   } else {
     next();
   }

@@ -6,7 +6,7 @@ const maxAttemps = rateLimit({
   // temps d'attente
   windowMs: 1 * 60 * 1000,
   // tentatives limitées à 3 avant d'être bloqué
-  maw: 3,
+  max: 3,
   message: "Votre compte a été bloqué, veuillez réessayer dans 3 minutes.",
 });
 
