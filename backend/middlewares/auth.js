@@ -1,11 +1,10 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
-module.exports.checkToken = (req, res, next) => {
+module.exports.checkTokenUser = (req, res, next) => {
   const token = req.cookies.jwt;
 
   if (token) {
-    // console.log("token " + token);
     jwt.verify(token, process.env.SECRET_TOKEN, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null;
