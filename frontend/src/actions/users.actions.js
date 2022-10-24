@@ -5,7 +5,9 @@ export const GET_USERS = "GET_USERS";
 export const getUsers = () => {
   return (dispatch) => {
     return axios
-      .get(`${process.env.REACT_APP_API_URL}/api/auth`)
+      .get(`${process.env.REACT_APP_API_URL}/api/auth`, {
+        withCredentials: true,
+      })
       .then((res) => {
         dispatch({ type: GET_USERS, payload: res.data });
       })

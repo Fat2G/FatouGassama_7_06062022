@@ -11,7 +11,9 @@ export const getUser = (userId) => {
     return (
       axios
         //récupération des données de l'utilisateur
-        .get(`${process.env.REACT_APP_API_URL}/api/auth/${userId}`)
+        .get(`${process.env.REACT_APP_API_URL}/api/auth/${userId}`, {
+          withCredentials: true,
+        })
         //utilisation de la méthode dispatch pour envoyer des données vers le reducer
         .then((res) => {
           dispatch({ type: GET_USER, payload: res.data });
@@ -24,7 +26,9 @@ export const getUser = (userId) => {
 export const uploadPic = (data, id) => {
   return (dispatch) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/auth/upload`, data)
+      .post(`${process.env.REACT_APP_API_URL}/api/auth/upload`, data, {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data.errors) {
           dispatch({ type: GET_USER_ERRORS, payload: res.data.errors });
