@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import illustration from "../../assets/img/ill-signup.png";
-import ModalSuccess from "../profil/ModalSuccess";
+import ModalSuccess from "../utils/ModalSuccess";
 
 const FormSignup = () => {
   const [formSubmit, setFormSubmit] = useState(false);
