@@ -1,9 +1,11 @@
 import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import cookie from "js-cookie";
 
 const ModalDelAccount = () => {
+  const navigate = useNavigate();
   //utilisation de la fonction modal afin de créer une fenêtre pop-up en utilisant le hook useState.
   const [modalDelAccount, setModalDelAccount] = useState(true);
 
@@ -35,7 +37,7 @@ const ModalDelAccount = () => {
         console.log(err);
       });
 
-    window.location = "/";
+    navigate("/");
   };
 
   return (

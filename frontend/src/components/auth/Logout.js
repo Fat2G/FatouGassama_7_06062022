@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import cookie from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Logout = () => {
+  const navigate = useNavigate();
   const removeCookie = (key) => {
     if (window !== "undefined") {
       cookie.remove(key, { expires: 1 });
@@ -23,7 +25,7 @@ const Logout = () => {
         console.log(err);
       });
 
-    window.location = "/";
+    navigate('/');
   };
 
   return (
