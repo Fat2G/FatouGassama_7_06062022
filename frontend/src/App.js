@@ -26,7 +26,7 @@ function App() {
         .then((res) => {
           setUserId(res.data);
         })
-        .catch((err) => console.log("Pas de token ! " + err));
+        .catch((err) => console.log("Pas de token ! "));
     };
     getToken();
     // si l'userId existe il y aura un dispatch de la fonction getUser et est mis à jour à chaque fois que la valeur de userId évolue
