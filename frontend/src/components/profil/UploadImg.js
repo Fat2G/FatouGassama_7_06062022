@@ -4,6 +4,7 @@ import { uploadPic } from "../../actions/user.actions";
 
 const UploadImg = () => {
   const [file, setFile] = useState();
+  const [postPic, setPostPic] = useState(null);
   // récupération des données de l'utilisateur stockées dans le reducer
   const userData = useSelector((state) => state.userReducer);
   // action qui dispatch l'image vers le store
@@ -18,6 +19,12 @@ const UploadImg = () => {
     data.append("file", file);
 
     dispatch(uploadPic(data, userData._id));
+  };
+
+  // prise en charge de l'image à envoyer
+  const showPic = (e) => {
+    setPostPic(URL.createObjectURL(e.target.files[0]));
+    setFile(e.target.files[0]);
   };
 
   // Si l'input file est vide le bouton envoyer est désactivé
@@ -42,10 +49,11 @@ const UploadImg = () => {
           name="file"
           accept=".jpg, .jpeg, .png"
           onChange={(e) => {
-            setFile(e.target.files[0]);
+            showPic(e);
             btnDisabled();
           }}
         />
+        <img src={postPic} alt="" className="preview-img" />
         <br />
         <input
           type="submit"
@@ -53,6 +61,7 @@ const UploadImg = () => {
           value="Envoyer"
           disabled={true}
           className="upload-pic-send"
+          onChange={(e) => handlePic(e)}
         />
       </form>
     </div>
