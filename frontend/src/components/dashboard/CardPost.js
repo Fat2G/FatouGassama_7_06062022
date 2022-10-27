@@ -120,7 +120,7 @@ const CardPosts = ({ post }) => {
                       accept=".jpg, .jpeg, .png"
                       onChange={(e) => handlePic(e)}
                     />
-                    <img src={postPic} alt="" className="preview-img" />
+                    <img src={postPic} alt="profil" className="preview-img" />
                   </div>
                 </>
               </div>
