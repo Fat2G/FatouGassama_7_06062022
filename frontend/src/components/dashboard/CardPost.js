@@ -31,7 +31,7 @@ const CardPosts = ({ post }) => {
       const data = new FormData();
       data.append("message", textUpdate);
       data.append("file", file);
-      
+
       axios({
         method: "put",
         url: `${process.env.REACT_APP_API_URL}/api/post/${postId}`,
@@ -52,8 +52,8 @@ const CardPosts = ({ post }) => {
         });
     } else {
       setIsUpdated(false);
-    } 
-  }  
+    }
+  };
 
   // suppression du post
   const deleteItem = () => {
@@ -70,17 +70,17 @@ const CardPosts = ({ post }) => {
     <div key={post._id}>
       <article className="ctn-card">
         <div className="card-header">
-          <div className="user-img">
+          <div className="user-img">            
             <img
               src={
-                !isEmpty(usersData[0]) &&
+                !isEmpty(usersData[0]) ?
                 usersData.reduce(
                   (lastValue, currentUser) =>
                     currentUser._id === post.posterId
                       ? currentUser.picture
                       : lastValue,
                   "./uploads/profil/defaultImg.jpg"
-                )
+                ) : null
               }
               alt="img utilisateur"
             />
