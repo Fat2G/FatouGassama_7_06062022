@@ -3,6 +3,7 @@ import { Context } from "../Context";
 import { useDispatch } from "react-redux";
 import { likePost, unlikePost } from "../../actions/post.actions";
 import iconHeart from "../../assets/icons/heart-solid.svg";
+import iconHeartFilled from "../../assets/icons/heart-solid-filled.svg";
 
 const LikeButton = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -41,7 +42,7 @@ const LikeButton = ({ post }) => {
         {userId && isLiked && (
           <>
             <img
-              src={iconHeart}
+              src={iconHeartFilled}
               className="like-icon"
               onClick={unlike}
               alt="like bouton"
