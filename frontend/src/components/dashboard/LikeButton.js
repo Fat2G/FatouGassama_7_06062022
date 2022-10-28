@@ -2,8 +2,8 @@ import { React, useState, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import { useDispatch } from "react-redux";
 import { likePost, unlikePost } from "../../actions/post.actions";
-import iconHeart from "../../assets/icons/heart-solid.svg";
-import iconHeartFilled from "../../assets/icons/heart-solid-filled.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const LikeButton = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -30,24 +30,18 @@ const LikeButton = ({ post }) => {
     <div>
       <div className="like-container">
         {userId && isLiked === false && (
-          <>
-            <img
-              src={iconHeart}
-              className="unlike-icon"
-              onClick={like}
-              alt="unlike bouton"
-            />
-          </>
+          <FontAwesomeIcon
+            className="unlike-icon"
+            icon={faHeart}
+            onClick={like}
+          />
         )}
         {userId && isLiked && (
-          <>
-            <img
-              src={iconHeartFilled}
-              className="like-icon"
-              onClick={unlike}
-              alt="like bouton"
-            />
-          </>
+          <FontAwesomeIcon
+            className="like-icon"
+            icon={faHeart}
+            onClick={unlike}
+          />
         )}
         <p className="like-num">{post.likers.length}</p>
       </div>

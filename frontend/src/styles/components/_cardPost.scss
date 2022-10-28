@@ -95,6 +95,18 @@ h3 {
   padding: 5px;
   border-radius: 5px;
   background-color: $ter-col;
+  color: $pri-col;
+  &:hover {
+    color: #fff;
+  }
+}
+
+.unlike-icon {
+  background-color: $ter-col;
+  color: #fff;
+  &:hover {
+    color: $pri-col;
+  }
 }
 
 .like-num {
