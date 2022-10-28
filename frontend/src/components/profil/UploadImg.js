@@ -7,6 +7,7 @@ const UploadImg = () => {
   const [postPic, setPostPic] = useState(null);
   // récupération des données de l'utilisateur stockées dans le reducer
   const userData = useSelector((state) => state.userReducer);
+  const error = useSelector((state) => state.errorReducer.userError);
   // action qui dispatch l'image vers le store
   const dispatch = useDispatch();
 
@@ -64,6 +65,10 @@ const UploadImg = () => {
           onChange={(e) => handlePic(e)}
         />
       </form>
+      <div className="error">
+        <p>{error.maxSize}</p>
+        <p>{error.format}</p>
+      </div>
     </div>
   );
 };

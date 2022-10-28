@@ -6,7 +6,6 @@ import { dateFormat } from "../utils/DateFormat";
 
 const UserProfile = () => {
   const userData = useSelector((state) => state.userReducer);
-  const error = useSelector((state) => state.errorReducer.userError);
 
   // Suppression du compte
   const [delButton, setdelButton] = useState(false);
@@ -24,10 +23,6 @@ const UserProfile = () => {
             <img src={userData.picture} alt="profil utilisateur" />
           </div>
           <UploadImg />
-          <div className="error">
-            <p>{error.maxSize}</p>
-            <p>{error.format}</p>
-          </div>
           <h3> Compte créé le {dateFormat(userData.createdAt)} </h3>
           <button type="button" className="btn" onClick={toggleDelButton}>
             Supprimer le compte
