@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,12 +12,11 @@ import {
 import illustration from "../../assets/img/ill-login.png";
 
 const FormLogin = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     const errorMessage = document.querySelector(".error-message");
 
     axios({
@@ -30,7 +29,7 @@ const FormLogin = () => {
       },
     })
       .then(() => {
-        navigate("/dashboard");
+        window.location = "/dashboard";
       })
       .catch(({ response: err }) => {
         if (err.data.message) {

@@ -1,13 +1,11 @@
 import { useState, React } from "react";
-import { useNavigate } from "react-router-dom";
 
 const ModalSuccess = () => { 
-  const navigate = useNavigate(); 
   const [modalSuccess, setModalSuccess] = useState(true);
 
   const toggleModalSuccess = () => {
     setModalSuccess(!modalSuccess);
-    navigate("/");
+    window.location = "/";
   };
 
   return (
