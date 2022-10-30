@@ -7,7 +7,7 @@ const maxAttemps = rateLimit({
   windowMs: 1 * 60 * 1000,
   // tentatives limitées à 3 avant d'être bloqué
   max: 3,
-  message: "Votre compte a été bloqué, veuillez réessayer dans 3 minutes.",
+  message: "Votre compte a été bloqué, veuillez réessayer dans 1 minutes.",
 });
 
 module.exports = maxAttemps;
