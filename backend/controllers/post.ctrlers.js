@@ -151,7 +151,7 @@ module.exports.deletePost = (req, res) => {
 };
 
 // ajout de likes
-module.exports.likePost = (req, res) => {
+module.exports.likePost = async (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("Id inconnu : " + req.params.id);
 
