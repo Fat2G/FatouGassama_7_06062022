@@ -4,7 +4,7 @@
 
 Pour utiliser l'application, il faudra installer sur votre machine:
 - NodeJS  14.18.0 ou +
-- Angular CLI 13.3.1 ou +
+- React 18.2 ou +
 
 #### 1. Copie des dossiers Frontend et Backend ####
 
